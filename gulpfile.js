@@ -8,8 +8,10 @@ var runSequence = require ('run-sequence');
 var webserver   = require ('gulp-webserver');
 var merge       = require ('merge-stream');
 var del         = require ('del');
+var i18n        = require ('gulp-html-i18n');
 
 var paths = {
+    yaml   : './lang/**/*.yaml',
     html   : './*.html',
     koliseo : ['./js/koliseo-agenda.js', './js/koliseo-polyfill.js'],
     fonts  : [
@@ -95,6 +97,10 @@ gulp.task ('fonts', function () {
 
 gulp.task ('html', function () {
     return gulp.src (['index.html', 'codigodeconducta.html'])
+        .pipe(i18n({
+          langDir: './lang',
+          trace: true
+        }))
         .pipe ($.useref ())
         .pipe ($.minifyHtml ({
             quotes : true,
@@ -126,7 +132,7 @@ gulp.task ('server:dist', ['dist'], function () {
             directoryListing : {
                 enable : false,
             },
-            open             : 'dist/index.html'
+            open             : 'dist/index-es.html'
         }));
 });
 
@@ -134,4 +140,14 @@ gulp.task ('dist', function (cb) {
     runSequence ('clean', 'build', cb);
 });
 
-gulp.task('default', ['server']);
+gulp.task('watch', function() {
+    gulp.watch(paths.html, ['html']);
+    gulp.watch(paths.css, ['css']);
+    gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.yaml, ['html']);
+});
+
+
+gulp.task('default',  function (cb) {
+    runSequence ('build', 'watch', 'server:dist', cb);
+});
