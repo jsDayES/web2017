@@ -121,13 +121,16 @@ iframe{ max-width: 100%; }
 .social a i { margin:0; }
 
 .streaming-section {
-  padding-top: 80px;
   padding-bottom: 0;
   background-color: #fff; }
-  
+
 .streaming-section p { margin-top:1em }
 .streaming-section a { color:#89621a }
 .streaming-section iframe { max-width: initial }
+
+.home-section + section {
+    padding-top: 80px;
+}
 
 /**********************
 
@@ -157,7 +160,7 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
   .img-speaker-box p {
     font-weight: 400;
     font-size: 13px; }
-    
+
 
 @media (max-width: 768px) {
   .welcome{ padding: .5em 0; }
@@ -173,10 +176,10 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
   }
   .welcome{ padding: .5em 0; }
   .overImg{ padding: 3em 1em;}
-  
+
   .logos { margin:0 0 2em 0; padding:0; }
   .logos li { display:block; margin:1em 0 }
-  
+
   .box { height:auto; background:transparent; }
   .box img {display:block; margin:0 auto; transform: initial }
 }
