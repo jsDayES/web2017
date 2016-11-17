@@ -35,11 +35,11 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav scroll-to navbar-right">
                         <li><a href="#home">${{ text.header.home }}$</a></li>
-                        <li><a href="#streaming">${{ text.header.streaming }}$</a></li>
-                        <li><a href="#speakers">${{ text.header.speakers }}$</a></li>
-                        <li><a href="#schedule">${{ text.header.schedule }}$</a></li>
+                        <!-- <li><a href="#streaming">${{ text.header.streaming }}$</a></li> -->
+                        <!-- <li><a href="#speakers">${{ text.header.speakers }}$</a></li>
+                        <li><a href="#schedule">${{ text.header.schedule }}$</a></li> -->
                         <li><a href="#where">${{ text.header.where }}$</a></li>
-                        <li><a href="#tickets">${{ text.header.tickets }}$</a></li>
+                        <!-- <li><a href="#tickets">${{ text.header.tickets }}$</a></li> -->
                         <li><a href="#organizers">${{ text.header.organizers }}$</a></li>
                         <li><a href="#sponsors">${{ text.header.sponsors }}$</a></li>
                     </ul>
@@ -375,7 +375,7 @@
             </div>
         </section><!--Where-->
 
-        <section id="tickets" class="tickets-section">
+        <!-- <section id="tickets" class="tickets-section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
@@ -435,7 +435,7 @@
                     </div>
                 </div>
             </div>
-        </section><!--Tikets-->
+        </section> -->
 
 
         <section class="banner shadow">
@@ -443,13 +443,10 @@
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
                        <div class="overImg">
-                            <h2>Contacto</h2>
-                            <p>
-                              Para cualquier duda o sugerencia que tengas,<br>
-                              No dudes en ponerte en contacto nos nosotros.
-                            </p><br /><br />
+                            <h2>${{ text.contact.title }}$</h2>
+                            <p>${{ text.contact.description }}$</p><br /><br />
                             <div class="text-center">
-                                <a class="btn btn-lg btn-yellow" href="mailto:hola@jsday.es">Contacta con Nosotros</a>
+                                <a class="btn btn-lg btn-yellow" href="mailto:hola@jsday.es">${{ text.contact.button }}$</a>
                             </div>
                         </div>
                     </div>
@@ -462,12 +459,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <h3>Organizadores</h3>
+                        <h3>${{ text.organizers.title }}$</h3>
                         <span class="center-line"></span>
-                        <p>
-                            Detr&aacute;s de este evento estamos un grupo de comunidades de inter&eacute;s <br>
-                            relacionadas con el uso de tecnolog&iacute;as centradas en JavaScript.
-                        </p>
+                        <p>${{ text.organizers.description }}$</p>
                     </div>
                 </div>
                 <div class="row">
@@ -492,20 +486,20 @@
                                 <a href="http://www.meetup.com/es-ES/AngularJS_Madrid/"><img src="img/organizacion/organizer-1.png" width="242" height="86" class="img-responsive" alt="AngularJS Madrid"></a>
                             </div>
                         </li>
-                        <li class="item">
+                        <!-- <li class="item">
                             <div class="organizers-box">
                                 <a href="http://www.gacetatecnologica.com/"><img src="img/organizacion/organizer-5.png" class="img-responsive" width="268" height="91" alt="Gaceta Tecnológica"></a>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center codigo">
-                        <h3>Código de conducta</h3>
+                        <h3>${{ text.codeOfConduct.title }}$</h3>
                         <span class="center-line"></span>
-                        <p>El evento se regirá por este <a href="codigodeconducta.html">código de conducta</a>, que puede resumirse en: respeta a los demás.</p>
-					          </div>
-				        </div>
+                        <p>${{ text.codeOfConduct.description }}$</p>
+					</div>
+				</div>
             </div>
         </section><!--organizers-->
 
@@ -514,13 +508,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <h3>Sponsors</h3>
+                        <h3>${{ text.sponsors.title }}$</h3>
                         <span class="center-line"></span>
-                        <p>Patrocinar ofrece una oportunidad &uacute;nica para exponer tu marca y encontrar talentos y perfiles especializados en tecnolog&iacute;as JavaScript.</p>
+                        <p>${{ text.sponsors.description }}$</p>
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">
                         <h4>Diamond</h4>
                     </div>
@@ -667,7 +661,7 @@
                       </li>
                     </ul>
 
-                </div>
+                </div> -->
 
 
                 <div class="row">
@@ -959,7 +953,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <a href="mailto:hola@jsday.es" class="btn btn-dark btn-lg">Apúntate como spónsor</a>
+                        <a href="mailto:hola@jsday.es" class="btn btn-dark btn-lg">${{ text.sponsors.button }}$</a>
                     </div>
                 </div>
 
@@ -971,13 +965,13 @@
             <div class="container">
                 <div class=" text-center">
                     <ul class="list-inline social">
-                        <li><a href="https://twitter.com/jsdayes"><span class="sr-only">Twitter de JSDayES</span> <i class="fa fa-twitter"></i></a></li>
-                        <li><a href="https://www.youtube.com/channel/UClqqpvRAqxpLT27rj7vKfOA"><span class="sr-only">Canal Youtube de JSDayES</span> <i class="fa fa-youtube"></i></a></li>
-                        <li><a href="https://plus.google.com/+JsdayEsMadrid"><span class="sr-only">Google Plus de JSDayES</span> <i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="https://twitter.com/jsdayes"><span class="sr-only">${{ text.footer.twitter }}$</span> <i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UClqqpvRAqxpLT27rj7vKfOA"><span class="sr-only">${{ text.footer.youtube }}$</span> <i class="fa fa-youtube"></i></a></li>
+                        <li><a href="https://plus.google.com/+JsdayEsMadrid"><span class="sr-only">${{ text.footer.google }}$</span> <i class="fa fa-google-plus"></i></a></li>
                     </ul>
                 </div>
             </div>
-            <span>JSDayES - 2a Edici&oacute;n &copy; Abril 2016</span>
+            <span>${{ text.footer.copyright }}$</span>
         </footer>
 
         <!-- build:js js/main.js -->

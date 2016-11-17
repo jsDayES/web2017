@@ -26,3 +26,27 @@ schedule:
     title: Programa
     description1: Las mejores sesiones sobre el ecosistema tecnológico de JavaScript.
     description2: Un día entero de talleres y otro de apasionantes charlas.
+
+contact:
+    title: Contacto
+    description: Para cualquier duda o sugerencia que tengas,<br> No dudes en ponerte en contacto nos nosotros.
+    button: Contacta con Nosotros
+
+organizers:
+    title: Organizadores
+    description: Detrás de este evento estamos un grupo de comunidades de interés <br> relacionadas con el uso de tecnologías centradas en JavaScript.
+
+codeOfConduct:
+    title: Código de conducta
+    description: El evento se regirá por este <a href="codigodeconducta-es.html">código de conducta</a>, que puede resumirse en: respeta a los demás.
+
+sponsors:
+    title: Sponsors
+    description: Patrocinar ofrece una oportunidad única para exponer tu marca y encontrar talentos y perfiles especializados en tecnologías JavaScript.
+    button: Apúntate como spónsor
+
+footer:
+    twitter: Twitter de JSDayES
+    youtube: Canal Youtube de JSDayES
+    google: Google Plus de JSDayES
+    copyright: JSDayES - 2a Edición &copy; Mayo 2017

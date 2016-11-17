@@ -9,6 +9,7 @@ var webserver   = require ('gulp-webserver');
 var merge       = require ('merge-stream');
 var del         = require ('del');
 var i18n        = require ('gulp-html-i18n');
+var addsrc      = require('gulp-add-src');
 
 var paths = {
     yaml   : './lang/**/*.yaml',
@@ -96,11 +97,12 @@ gulp.task ('fonts', function () {
 });
 
 gulp.task ('html', function () {
-    return gulp.src (['index.html', 'codigodeconducta.html'])
+    return gulp.src (['index.html'])
         .pipe(i18n({
           langDir: './lang',
           trace: true
         }))
+        .pipe(addsrc(['codigodeconducta-es.html', 'codigodeconducta-en.html']))
         .pipe ($.useref ())
         .pipe ($.minifyHtml ({
             quotes : true,

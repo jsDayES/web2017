@@ -28,7 +28,7 @@ organizador inmediatamente.
 
 ### JSDayES 2016
 
-* Organizadores: Raquel Benito [@Pand_Ra](https://twitter.com/Pand_Ra), Alejandro Fernández [@pinchito](https://twitter.com/pinchito), María Sánchez [@chimarys](https://twitter.com/chimarys), Javier Vélez [@javiervelezreye](https://twitter.com/javiervelezreye), Félix Zapata [@felixzapata](https://twitter.com/felixzapata), Isabel Cabezas [@isabelcabezasm](https://twitter.com/isabelcabezasm), Juan Fran Alcántara (juanfran.ag@gmail.com).
+* Organizadores: Raquel Benito [@Pand_Ra](https://twitter.com/Pand_Ra), Alejandro Fernández [@pinchito](https://twitter.com/pinchito), María Sánchez [@chimarys](https://twitter.com/chimarys), Juanfran Alcántara [juanfran](https://github.com/juanfran/).
 
 **Si tienes preguntas o sugerencias sobre este código de conducta,
 por favor contacta con uno de los organizadores.**
@@ -45,4 +45,3 @@ Traducido por [@pinchito](https://twitter.com/pinchito).
 
 Este código de conducta, al igual que sus fuentes, está licenciado bajo la licencia
 [Creative Commons Zero license](http://creativecommons.org/publicdomain/zero/1.0/).
-

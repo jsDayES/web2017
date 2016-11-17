@@ -6,6 +6,7 @@
     "del": "^2.2.0",
     "fs": "^0.0.2",
     "gulp": "^3.8.5",
+    "gulp-add-src": "^0.2.0",
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-html-i18n": "^0.6.3",
