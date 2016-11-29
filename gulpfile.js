@@ -104,7 +104,7 @@ gulp.task ('html', function () {
             langDir: './lang',
             trace: true,
         }))
-        .pipe(addsrc(['codigodeconducta-es.html', 'codigodeconducta-en.html']))
+        .pipe(addsrc(['codigodeconducta.html', 'codeofconduct.html']))
         .pipe ($.useref ())
         .pipe ($.minifyHtml ({
             quotes : true,
