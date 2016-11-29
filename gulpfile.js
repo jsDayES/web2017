@@ -99,8 +99,10 @@ gulp.task ('fonts', function () {
 gulp.task ('html', function () {
     return gulp.src (['index.html'])
         .pipe(i18n({
-          langDir: './lang',
-          trace: true
+            createLangDirs: true,
+            defaultLang: 'en',
+            langDir: './lang',
+            trace: true,
         }))
         .pipe(addsrc(['codigodeconducta-es.html', 'codigodeconducta-en.html']))
         .pipe ($.useref ())
@@ -127,14 +129,14 @@ gulp.task ('server', function () {
 });
 
 gulp.task ('server:dist', ['dist'], function () {
-    gulp.src ('.')
+    gulp.src ('dist')
         .pipe (webserver ({
             port             : 5000,
             livereload       : false,
             directoryListing : {
                 enable : false,
             },
-            open             : 'dist/index-es.html'
+            open             : true
         }));
 });
 

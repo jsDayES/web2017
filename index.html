@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <script>
+        var language = navigator.language || navigator.browserLanguage;
+
+        if(language === 'es' && window.location.href.indexOf('/es/') === -1) {
+            window.location.href='/es/';
+        }
+        </script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +16,7 @@
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,600,500,700">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Cabin:400,400italic,500,600">
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Great+Vibes">
-        <!-- build:css css/main.css -->
+        <!-- build:css /css/main.css -->
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="css/flexslider.css" media="screen">
@@ -54,7 +62,7 @@
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text-center">
                             <div class="overImg welcome">
-                              <img src="img/logo.png" class="img-logo" alt="Logo JSDay 2017">
+                              <img src="/img/logo.png" class="img-logo" alt="Logo JSDay 2017">
                               <h1>${{ text.home.welcome }}$</h1>
                               <div class="flexslider intro-slider">
                                   <ul class="slides">
@@ -409,7 +417,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-5 col-sm-offset-1">
-                        <h3><span style="display:inline;"><img src="img/campus.png" alt="Campus Madrid"></span>Campus Madrid</h3>
+                        <h3><span style="display:inline;"><img src="/img/campus.png" alt="Campus Madrid"></span>Campus Madrid</h3>
                         Calle Moreno Nieto, 2 28005 Madrid, Spain <br><br>
                         <h4><i class="fa fa-bus"></i> C&oacute;mo llegar</h4>
                         Metro -  [10] Pr&iacute;ncipe P&iacute;o · [5] La Latina · [2] Ópera<br>
@@ -515,22 +523,22 @@
                     <ul id="organizers-slider" class="organizers-slider">
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/Madrid-Polymer-Group/"><img src="img/organizacion/organizer-4.png" width="231" height="80" class="img-responsive" alt="Madrid Polymer Group"></a>
+                                <a href="http://www.meetup.com/es-ES/Madrid-Polymer-Group/"><img src="/img/organizacion/organizer-4.png" width="231" height="80" class="img-responsive" alt="Madrid Polymer Group"></a>
                             </div>
                         </li>
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/Node-js-Madrid/"><img src="img/organizacion/organizer-2.png" width="268" height="85" class="img-responsive" alt="NodeJS Madrid"></a>
+                                <a href="http://www.meetup.com/es-ES/Node-js-Madrid/"><img src="/img/organizacion/organizer-2.png" width="268" height="85" class="img-responsive" alt="NodeJS Madrid"></a>
                             </div>
                         </li>
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/madridjs/"><img src="img/organizacion/organizer-3.png" width="268" height="84" class="img-responsive" alt="Madrid JS"></a>
+                                <a href="http://www.meetup.com/es-ES/madridjs/"><img src="/img/organizacion/organizer-3.png" width="268" height="84" class="img-responsive" alt="Madrid JS"></a>
                             </div>
                         </li>
                          <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/AngularJS_Madrid/"><img src="img/organizacion/organizer-1.png" width="242" height="86" class="img-responsive" alt="AngularJS Madrid"></a>
+                                <a href="http://www.meetup.com/es-ES/AngularJS_Madrid/"><img src="/img/organizacion/organizer-1.png" width="242" height="86" class="img-responsive" alt="AngularJS Madrid"></a>
                             </div>
                         </li>
                         <!-- <li class="item">
@@ -717,10 +725,11 @@
                         <table id="sponsor-mobile-table" class="table">
                             <thead>
                                 <tr>
-                                    <th>Silver - 500€</th>
-                                    <th>Gold - 750€</th>
-                                    <th>Platinum - 1500€</th>
-                                    <th>Diamond - 3000€</th>
+                                    <th>Silver - 1000€</th>
+                                    <th>Gold - 1500€</th>
+                                    <th>Gold Plus - 2000€</th>
+                                    <th>Platinum - 3000€</th>
+                                    <th>Diamond - 5000€</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -728,6 +737,7 @@
                                     <th scope="row" colspan="4">Logotipo en web</th>
                                 </tr>
                                 <tr>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -742,6 +752,7 @@
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="4">Logotipo en material impreso</th>
@@ -749,6 +760,7 @@
                                 <tr>
 
                                     <td><span class="sr-only">No permitido</span> </td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -762,12 +774,14 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="4">5 minutos de presentación</th>
                                 </tr>
                                 <tr>
 
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -782,12 +796,14 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row" colspan="4">Referencia en prensa y RRSS</th>
                                 </tr>
                                 <tr>
 
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
@@ -801,6 +817,7 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
@@ -808,6 +825,7 @@
                                 </tr>
                                 <tr>
 
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
@@ -820,6 +838,7 @@
 
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td>1 persona</td>
+                                    <td>1 persona</td>
                                     <td>2 personas</td>
                                     <td>3 personas</td>
                                 </tr>
@@ -828,6 +847,7 @@
                                 </tr>
                                 <tr>
 
+                                    <td>1 entrada</td>
                                     <td>1 entrada</td>
                                     <td>1 entrada</td>
                                     <td>2 entradas</td>
@@ -839,15 +859,17 @@
                             <thead>
                                 <tr>
                                     <td></td>
-                                    <th>Silver - 500€</th>
-                                    <th>Gold - 750€</th>
-                                    <th>Platinum - 1500€</th>
-                                    <th>Diamond - 3000€</th>
+                                    <th>Silver - 1000€</th>
+                                    <th>Gold - 1500€</th>
+                                    <th>Gold Plus - 2000€</th>
+                                    <th>Platinum - 3000€</th>
+                                    <th>Diamond - 5000€</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <th scope="row">Logotipo en web</th>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -859,10 +881,12 @@
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Logotipo en material impreso</th>
                                     <td><span class="sr-only">No permitido</span> </td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -873,9 +897,11 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">5 minutos de presentación</th>
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
@@ -887,9 +913,11 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Referencia en prensa y RRSS</th>
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
@@ -900,10 +928,12 @@
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Mailing standalone a los registrados</th>
+                                    <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td><span class="sr-only">No permitido</span> </td>
@@ -913,11 +943,13 @@
                                     <th scope="row">Cena con ponentes y organización</th>
                                     <td><span class="sr-only">No permitido</span> </td>
                                     <td>1 persona</td>
+                                    <td>1 persona</td>
                                     <td>2 personas</td>
                                     <td>3 personas</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Entradas de cortesía</th>
+                                    <td>1 entrada</td>
                                     <td>1 entrada</td>
                                     <td>1 entrada</td>
                                     <td>2 entradas</td>
@@ -934,15 +966,11 @@
                                     <th scope="row">Coffe break</th>
                                     <th scope="row">Community basic support</th>
                                     <th scope="row">Lanyards</th>
-
-
-
                                 </tr>
                                 <tr>
                                     <td>1000 €</td>
                                     <td>100 €</td>
                                     <td>500 €</td>
-
                                 </tr>
                                 <tr>
                                     <th scope="row">Lunch break</th>
@@ -954,7 +982,6 @@
                                     <td>3000€</td>
                                     <td>600 €</td>
                                     <td>500 €</td>
-
                                 </tr>
                                 <tr>
                                     <th scope="row">Community Standard support</th>
@@ -1021,7 +1048,7 @@
             <span>${{ text.footer.copyright }}$</span>
         </footer>
 
-        <!-- build:js js/main.js -->
+        <!-- build:js /js/main.js -->
         <script src="js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="js/jquery.easing.1.3.min.js"></script>
