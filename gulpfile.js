@@ -50,12 +50,12 @@ var paths = {
         './js/jquery.countdown.min.js'
     ],
     images : './img/**/*',
-    dist   : './dist/'
+    dist   : './web2017/'
 };
 
 gulp.task ('clean', function () {
     return del ([
-        './dist/**',
+        './web2017/**',
     ]);
 });
 
@@ -111,7 +111,7 @@ gulp.task ('html', function () {
             empty  : true,
             spare  : true
     }))
-    .pipe(gulp.dest ('dist'))
+    .pipe(gulp.dest (paths.dist))
 });
 
 gulp.task ('build', ['images', 'fonts', 'koliseo', 'js', 'css', 'html']);
@@ -129,14 +129,14 @@ gulp.task ('server', function () {
 });
 
 gulp.task ('server:dist', ['dist'], function () {
-    gulp.src ('dist')
+    gulp.src ('.')
         .pipe (webserver ({
             port             : 5000,
             livereload       : false,
             directoryListing : {
                 enable : false,
             },
-            open             : true
+            open             : 'web2017'
         }));
 });
 

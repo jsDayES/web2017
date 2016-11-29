@@ -6,9 +6,9 @@
 
 //backstretch
 $.backstretch([
-    "/img/img-1.jpg",
-    "/img/img-2.jpg",
-    "/img/img-3.jpg"
+    "/web2017/img/img-1.jpg",
+    "/web2017/img/img-2.jpg",
+    "/web2017/img/img-3.jpg"
 ], {
     fade: 750,
     duration: 4000
