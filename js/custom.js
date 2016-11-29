@@ -1,7 +1,7 @@
 /*Theme    : assan
  * Author  : Design_mylife
  * Version : V1.8
- * 
+ *
  */
 
 
@@ -79,7 +79,7 @@ $(document).ready(function () {
         $('.testi-slider').flexslider({
             animation: "slide",
             direction: "horizantal",
-            directionNav: true,
+            directionNav: false,
             controlNav: false,
             prevText: "<i class='fa fa-angle-left'></i>",
             nextText: "<i class='fa fa-angle-right'></i>"
@@ -102,7 +102,7 @@ $(document).ready(function () {
         navigation:true,
         navigationText:	["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"]
     });
-    
+
         $("#organizers-slider").owlCarousel({
         autoPlay: 3000, //Set AutoPlay to 3 seconds
         items: 4,
@@ -125,41 +125,39 @@ $('#gallery-slider').masonry({
 
 
   $('#send-message-reservation').on("click",function(e){
-            
+
             // Stop form submission & check the validation
             e.preventDefault();
-            
+
             // Variable declaration
             var error = false;
-            
+
             var email = $('#email-reservation').val();
-            
+
             var date = $('#datepicker').val();
-            
-            
+
+
             if(email.length == 0 || email.indexOf('@') < 1 || (email.lastIndexOf('.') - email.indexOf('@') < 2) || (email.length - email.lastIndexOf('.') < 2) )
             {
                 var error = true;
-                
+
                 $('#email-reservation').addClass("validation");
-                
+
             }else{
                 $('#email-reservation').removeClass("validation");
             }
-            
+
             if(date.length == 0){
                 var error = true;
                 $('#datepicker').addClass("validation");
             }else{
                 $('#datepicker').removeClass("validation");
             }
-            
-            
+
+
         });
-        
-         // DATEPICKER 
+
+         // DATEPICKER
   $(function() {
     $( "#datepicker" ).datepicker();
 });
-
-

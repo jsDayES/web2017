@@ -1,7 +1,7 @@
 /*Theme    : assan - restaurant
  * Author  : Design_mylife
  * Version : V1.1
- * 
+ *
  */
 
 /**base**/
@@ -183,7 +183,7 @@ Home style
     position: relative;
     display: table-cell;
     vertical-align: middle;
-    z-index: 3; 
+    z-index: 3;
     color: #fff;}
     #home .home-inner h3 {
       font-family: "Great Vibes", cursive;
@@ -205,12 +205,16 @@ Home style
         #home .home-inner .flexslider .slides li {
           text-transform: uppercase;
           font-size: 40px;
-          line-height: 40px;
+          line-height: 45px;
           color: #fff;
           font-weight: 700;
           font-family: "Raleway", sans-serif; }
+         #home .home-inner .flexslider .slides .large {
+             font-size: 26px;
+         }
       #home .home-inner .flexslider .flex-control-nav {
         left: 0; }
+
 
 .count-down-1 {
   position: relative;
@@ -282,30 +286,6 @@ Banner style
     color: #fff; }
   .banner .center-line {
     background-color: rgba(255, 255, 255, 0.5); }
-  .banner .flexslider {
-    border: 0px;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    -ms-box-shadow: none;
-    box-shadow: none;
-    text-align: center;
-    margin: 0px; }
-    .banner .flexslider .slides li p {
-      color: #fff;
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: 400;
-      line-height: 30px;
-      padding: 0px 30px; }
-    .banner .flexslider .slides li h6 {
-      color: #f2b84b; }
-    .banner .flexslider .slides li img {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      -webkit-border-radius: 50%;
-      margin: 0 auto; }
   .banner .flex-direction-nav a {
     text-decoration: none;
     display: block;
@@ -333,7 +313,47 @@ Banner style
     display: none; }
   .banner .flex-direction-nav a:before {
     display: none; }
-    
+
+
+/**********************
+
+Previous event style
+
+**********************/
+
+#event-presentation {
+    background-color: #f1f1f1;
+}
+
+#event-presentation .description h2 {
+    margin-bottom: 10px;
+}
+
+#event-presentation .flexslider {
+  border: 0px;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+  margin: 0px;
+  padding-bottom: 10px; }
+  #event-presentation .flexslider .slides li p {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 30px;
+    padding: 0px 30px; }
+  #event-presentation .flexslider .slides li h6 {
+    color: #f2b84b; }
+  #event-presentation .flexslider .slides li img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    margin: 0 auto; }
+
 
 /**********************
 
@@ -397,7 +417,7 @@ Schedule style
     .schedule-style img {
         margin-left: 10px;
     }
-    
+
 .schedule-shadow {
     -background-color: #fbecd0;
     background-color: #fff;
@@ -567,7 +587,7 @@ Sponsors style
     margin-bottom: 30px;
     margin-left: 15px;
     margin-right: 15px; }
-    
+
 .sponsors-slider {
   position: relative; }
   .sponsors-slider .owl-buttons {
@@ -606,7 +626,7 @@ Organizers style
     margin-bottom: 30px;
     margin-left: 15px;
     margin-right: 15px; }
-    
+
 .organizers-slider {
   position: relative; }
   .organizers-slider .owl-buttons {
@@ -629,7 +649,7 @@ Organizers style
     border-radius: 0px;
     -background-color: #f2b84b;
     background-color: #fff;}
-  
+
 .owl-theme .owl-controls .owl-buttons div {
   -background: #f2b84b !important;
    background: #fff !important;
@@ -648,8 +668,8 @@ Sponsors style
   padding-top: 80px;
   padding-bottom: 50px;
   background-color: #f1f1f1;
-} 
-    
+}
+
 /**********************
 
 Proposals style
@@ -664,8 +684,8 @@ Proposals style
   .proposals .center-title p {
     color: #fff; }
   .proposals .center-title .center-line {
-    background-color: rgba(255, 255, 255, 0.3); }   
-    
+    background-color: rgba(255, 255, 255, 0.3); }
+
 .proposals-style {
   margin-bottom: 15px;
   padding: 0px; }

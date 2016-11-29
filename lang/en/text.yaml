@@ -9,6 +9,7 @@ header:
     tickets: Entradas
     organizers: Organización
     sponsors: Sponsors
+    cfp: CfP    
 
 home:
     welcome: Bienvenido a JSDayES 2017

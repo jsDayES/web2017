@@ -9,6 +9,7 @@ header:
     tickets: Entradas
     organizers: Organización
     sponsors: Sponsors
+    cfp: CfP
 
 home:
     welcome: Bienvenido a JSDayES 2017
@@ -49,4 +50,4 @@ footer:
     twitter: Twitter de JSDayES
     youtube: Canal Youtube de JSDayES
     google: Google Plus de JSDayES
-    copyright: JSDayES - 2a Edición &copy; Mayo 2017
+    copyright: JSDayES - 3a Edición &copy; Mayo 2017

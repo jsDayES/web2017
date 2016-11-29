@@ -35,6 +35,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav scroll-to navbar-right">
                         <li><a href="#home">${{ text.header.home }}$</a></li>
+                         <li><a href="#proposals">${{ text.header.cfp }}$</a></li>
                         <!-- <li><a href="#streaming">${{ text.header.streaming }}$</a></li> -->
                         <!-- <li><a href="#speakers">${{ text.header.speakers }}$</a></li>
                         <li><a href="#schedule">${{ text.header.schedule }}$</a></li> -->
@@ -58,7 +59,7 @@
                               <div class="flexslider intro-slider">
                                   <ul class="slides">
                                       <li>${{ text.home.text1 }}$</li>
-                                      <li>${{ text.home.text2 }}$</li>
+                                      <li class="large">${{ text.home.text2 }}$</li>
                                       <li>${{ text.home.text3 }}$</li>
                                   </ul>
                               </div>
@@ -286,17 +287,18 @@
             </div>
         </section> -->
 
-        <section class="banner shadow">
+        <section id="event-presentation">
             <div class="container">
-                <div class="row">
+                <div class="row description">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                       <div class="overImg">
-                          <h2>Así fue <span class="name">JSDayES 2015</span></h2>
-                          <p>La primera edición de JSDay fue una pasada.</p>
-                          <p>¿Te lo vas a perder este año?</p>
-                        </div>
+                        <h2><span class="name">JSDayES</span> la conferencia de JavaScript más grande de España</h2>
+                        <p><strong>JSDayES</strong> es una conferencia de 2 días multi-track (Español e Ingles) dedicada a Javascript y su ecosistema.</p>
+                        <p>JavaScript, NodeJS, React, AngularJS, Polymer... ¿te lo vas a perder?<p>
                     </div>
-                </div><!--section title-->
+                    <div class="col-sm-6 col-sm-offset-3 center-title text-center">
+                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">Env&iacute;a tu Propuesta</a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-3">
                          <iframe width="560" height="315" src="https://www.youtube.com/embed/UQ2tKT_tS90" frameborder="1" allowfullscreen></iframe>
@@ -345,8 +347,53 @@
                     </div>
                 </div>
             </div>
-        </section><!--testimonials-->
+        </section>
 
+        <section id="proposals" class="proposals">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 center-title text-center">
+                        <h2>Participa</h2>
+                        <span class="center-line"></span>
+                        <p>
+                            ¿Quieres participar como ponente dando una charla? <br>
+                            No te lo pienses. Accede al formulario e incribe tu propuesta.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <h3>Fechas Importantes</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <ul class="proposals-style list-unstyled">
+                           <li class="clearfix">
+                                <div class="detail">
+                                    <h4>Ampliado límite para envío de propuestas.</h4>
+                                    <span class="date">28/02/2016</span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="detail">
+                                    <h4>Notificaci&oacute;n de Aceptaci&oacute;n</h4>
+                                    <span>Fecha en que comunicaremos las propuestas aceptadas.</span>
+                                    <span class="date">03/2016</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div> <br><br>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">Env&iacute;a tu Propuesta</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
 
         <section id="where" class="where-section">
             <div class="container">
