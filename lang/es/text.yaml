@@ -16,6 +16,7 @@ home:
     text1: Charlas & Talleres
     text2: JavaScript, NodeJS, AngularJS, Polymer...
     text3: Café & Empanada
+    date: 5 y 6 Mayo 2017 <br/> Madrid
 
 speakers:
     title: Speakers
@@ -23,10 +24,26 @@ speakers:
         Hemos seleccionado los mejores ponentes para que nos cuenten
         su experiencia con las tecnologías de JavaScript.
 
+cfp:
+    title: Envía tu Propuesta
+    join: Participa
+    description: ¿Quieres participar como ponente dando una charla? <br> No te lo pienses. Accede al formulario e incribe tu propuesta.
+    dates: Fechas Importantes
+    limit: Límite para envío de propuestas.
+    datelimit: 28/02/2017
+    notification: Fecha en que comunicaremos las propuestas aceptadas
+    notificationTitle: Notificación de Aceptación
+    notificationlimit: 03/2017
+
+eventPresentation:
+    title: <span class="name">JSDayES</span> la conferencia de JavaScript más grande de España
+    description: <strong>JSDayES</strong> es una conferencia de 2 días multi-track (Español e Ingles) dedicada a Javascript y su ecosistema.
+    description2: JavaScript, NodeJS, React, AngularJS, Polymer... ¿te lo vas a perder?
+
 schedule:
     title: Programa
     description1: Las mejores sesiones sobre el ecosistema tecnológico de JavaScript.
-    description2: Un día entero de talleres y otro de apasionantes charlas.
+    description2: Dos días de talleres y charlas.
 
 contact:
     title: Contacto
@@ -45,6 +62,26 @@ sponsors:
     title: Sponsors
     description: Patrocinar ofrece una oportunidad única para exponer tu marca y encontrar talentos y perfiles especializados en tecnologías JavaScript.
     button: Apúntate como spónsor
+
+sponsorsInfo:
+    title: Modelos de patrocinios
+    allowed: Permitido
+    notallowed: ${{ text.sponsorsInfo.notallowed }}$
+    logo: Logotipo en web
+    acknowledgment: Agradecimiento en evento
+    printLogo: Logotipo en material impreso
+    logoscreen: Logotipo en salvapantallas
+    presentation: 5 minutos de presentación
+    table: Mesa con roll up propio
+    press: Referencia en prensa y RRSS
+    welcomePack: Flyer o regalo en Welcome Pack
+    mailing: Mailing standalone a los registrados
+    dinner: Cena con ponentes y organización
+    person: persona
+    people: personas
+    ticket: ticket
+    tickets: tickets
+    sponsorticket: Entradas de cortesía
 
 footer:
     twitter: Twitter de JSDayES

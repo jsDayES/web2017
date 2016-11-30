@@ -29,7 +29,7 @@
         <link rel="stylesheet" type="text/css" href="css/custom.css" media="screen">
         <!-- endbuild-->
     </head>
-    <body data-spy="scroll">
+    <body data-spy="scroll" class="lang-${{ _lang_ }}$">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -63,7 +63,10 @@
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text-center">
                             <div class="overImg welcome">
-                              <img src="img/logo.png" class="img-logo" alt="Logo JSDay 2017">
+                              <div class="welcomeLogo">
+                                  <img src="img/logo.png" class="img-logo" alt="Logo JSDay 2017">
+                                  <span class="date">${{ text.home.date }}$</span>
+                              </div>
                               <h1>${{ text.home.welcome }}$</h1>
                               <div class="flexslider intro-slider">
                                   <ul class="slides">
@@ -295,17 +298,16 @@
                 </div>
             </div>
         </section> -->
-
         <section id="event-presentation">
             <div class="container">
                 <div class="row description">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <h2><span class="name">JSDayES</span> la conferencia de JavaScript más grande de España</h2>
-                        <p><strong>JSDayES</strong> es una conferencia de 2 días multi-track (Español e Ingles) dedicada a Javascript y su ecosistema.</p>
-                        <p>JavaScript, NodeJS, React, AngularJS, Polymer... ¿te lo vas a perder?<p>
+                        <h2>${{ text.eventPresentation.title }}$</h2>
+                        <p>${{ text.eventPresentation.description }}$</p>
+                        <p>${{ text.eventPresentation.description2 }}$<p>
                     </div>
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">Env&iacute;a tu Propuesta</a>
+                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
                     </div>
                 </div>
                 <div class="row">
@@ -313,7 +315,7 @@
                          <iframe width="560" height="315" src="https://www.youtube.com/embed/UQ2tKT_tS90" frameborder="1" allowfullscreen></iframe>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row hide-${{ _lang_ }}$">
                     <div class="col-sm-8 col-sm-offset-2">
                         <div class="flexslider testi-slider wow animated fadeInUp" data-wow-delay=".2s">
                             <br><br>
@@ -362,17 +364,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <h2>Participa</h2>
+                        <h2>${{text.cfp.join}}$</h2>
                         <span class="center-line"></span>
-                        <p>
-                            ¿Quieres participar como ponente dando una charla? <br>
-                            No te lo pienses. Accede al formulario e incribe tu propuesta.
-                        </p>
+                        <p>${{text.cfp.description}}$</p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <h3>Fechas Importantes</h3>
+                        <h3>${{text.cfp.dates}}$</h3>
                     </div>
                 </div>
                 <div class="row">
@@ -380,15 +379,15 @@
                         <ul class="proposals-style list-unstyled">
                            <li class="clearfix">
                                 <div class="detail">
-                                    <h4>Ampliado límite para envío de propuestas.</h4>
-                                    <span class="date">28/02/2016</span>
+                                    <h4>${{text.cfp.limit}}$</h4>
+                                    <span class="date">${{text.cfp.datelimit}}$</span>
                                 </div>
                             </li>
                             <li class="clearfix">
                                 <div class="detail">
-                                    <h4>Notificaci&oacute;n de Aceptaci&oacute;n</h4>
-                                    <span>Fecha en que comunicaremos las propuestas aceptadas.</span>
-                                    <span class="date">03/2016</span>
+                                    <h4>${{text.cfp.notificationTitle}}$</h4>
+                                    <span>${{text.cfp.notification}}$</span>
+                                    <span class="date">${{text.cfp.notificationlimit}}$</span>
                                 </div>
                             </li>
                         </ul>
@@ -396,15 +395,13 @@
                 </div> <br><br>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">Env&iacute;a tu Propuesta</a>
+                        <a target="_blank" href="https://goo.gl/GC6LS4" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
                     </div>
                 </div>
-
-
             </div>
         </section>
 
-        <section id="where" class="where-section">
+        <!-- <section id="where" class="where-section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
@@ -429,7 +426,7 @@
                     </div>
                 </div>
             </div>
-        </section><!--Where-->
+        </section> -->
 
         <!-- <section id="tickets" class="tickets-section">
             <div class="container">
@@ -722,7 +719,7 @@
 
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2 center-title text-center">
-                        <h4>Modelos de patrocinios</h4>
+                        <h4>${{ text.sponsorsInfo.title }}$</h4>
                         <table id="sponsor-mobile-table" class="table">
                             <thead>
                                 <tr>
@@ -735,124 +732,123 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row" colspan="4">Logotipo en web</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.logo }}$</th>
                                 </tr>
                                 <tr>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="4">Agradecimiento en evento</th>
-                                </tr>
-                                <tr>
-
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" colspan="4">Logotipo en material impreso</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.acknowledgment }}$</th>
                                 </tr>
                                 <tr>
 
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="4">Logotipo en salvapantallas</th>
-                                </tr>
-                                <tr>
-
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" colspan="4">5 minutos de presentación</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.printLogo }}$</th>
                                 </tr>
                                 <tr>
 
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="4">Mesa con roll up propio</th>
-                                </tr>
-                                <tr>
-
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" colspan="4">Referencia en prensa y RRSS</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.logoscreen }}$</th>
                                 </tr>
                                 <tr>
 
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="4">Flyer o regalo en Welcome Pack</th>
-                                </tr>
-                                <tr>
-
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" colspan="4">Mailing standalone a los registrados</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.presentation }}$</th>
                                 </tr>
                                 <tr>
 
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" colspan="4">Cena con ponentes y organización</th>
-                                </tr>
-                                <tr>
-
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td>1 persona</td>
-                                    <td>1 persona</td>
-                                    <td>2 personas</td>
-                                    <td>3 personas</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" colspan="4">Entradas de cortesía</th>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.table }}$</th>
                                 </tr>
                                 <tr>
 
-                                    <td>1 entrada</td>
-                                    <td>1 entrada</td>
-                                    <td>1 entrada</td>
-                                    <td>2 entradas</td>
-                                    <td>3 entradas</td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.press }}$</th>
+                                </tr>
+                                <tr>
+
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.welcomePack }}$</th>
+                                </tr>
+                                <tr>
+
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.mailing }}$<</th>
+                                </tr>
+                                <tr>
+
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.dinner }}$</th>
+                                </tr>
+                                <tr>
+
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td>1 ${{ text.sponsorsInfo.person }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.person }}$</td>
+                                    <td>2 ${{ text.sponsorsInfo.people }}$</td>
+                                    <td>3 ${{ text.sponsorsInfo.people }}$</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="4">${{ text.sponsorsInfo.sponsorticket }}$</th>
+                                </tr>
+                                <tr>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>2 ${{ text.sponsorsInfo.tickets }}$</td>
+                                    <td>3 ${{ text.sponsorsInfo.tickets }}$</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -869,97 +865,97 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row">Logotipo en web</th>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.logo }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Agradecimiento en evento</th>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.acknowledgment }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Logotipo en material impreso</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.printLogo }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Logotipo en salvapantallas</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.logoscreen }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">5 minutos de presentación</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.presentation }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Mesa con roll up propio</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.table }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Referencia en prensa y RRSS</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.press }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Flyer o regalo en Welcome Pack</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.welcomePack }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Mailing standalone a los registrados</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td><span class="sr-only">Permitido</span> <i class="fa fa-check"></i></td>
+                                    <th scope="row">${{ text.sponsorsInfo.mailing }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.allowed }}$</span> <i class="fa fa-check"></i></td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Cena con ponentes y organización</th>
-                                    <td><span class="sr-only">No permitido</span> </td>
-                                    <td>1 persona</td>
-                                    <td>1 persona</td>
-                                    <td>2 personas</td>
-                                    <td>3 personas</td>
+                                    <th scope="row">${{ text.sponsorsInfo.dinner }}$</th>
+                                    <td><span class="sr-only">${{ text.sponsorsInfo.notallowed }}$</span> </td>
+                                    <td>1 ${{ text.sponsorsInfo.person }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.person }}$</td>
+                                    <td>2 ${{ text.sponsorsInfo.people }}$</td>
+                                    <td>3 ${{ text.sponsorsInfo.people }}$</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Entradas de cortesía</th>
-                                    <td>1 entrada</td>
-                                    <td>1 entrada</td>
-                                    <td>1 entrada</td>
-                                    <td>2 entradas</td>
-                                    <td>3 entradas</td>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>1 ${{ text.sponsorsInfo.ticket }}$</td>
+                                    <td>2 ${{ text.sponsorsInfo.tickets }}$</td>
+                                    <td>3 ${{ text.sponsorsInfo.tickets }}$</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-sm-8 col-sm-offset-2 center-title text-center">
+                    <!-- <div class="col-sm-8 col-sm-offset-2 center-title text-center">
                         <h4>Otras Fórmulas de Patrocinio</h4>
                         <table id="other-sponsor-mobile-table" class="table">
                             <tbody>
@@ -1024,7 +1020,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">

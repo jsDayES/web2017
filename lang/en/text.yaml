@@ -1,53 +1,90 @@
-title: JSDayES 2017 ENGLISH
+title: JSDayES 2017
 header:
-    changeNavState: Cambiar estado navegación
+    changeNavState: Change navigation state
     home: Home
     streaming: Streaming
     speakers: Speakers
-    schedule: Programa
-    where: Dónde
-    tickets: Entradas
-    organizers: Organización
+    schedule: Schedule
+    where: Where
+    tickets: Tickets
+    organizers: Organizers
     sponsors: Sponsors
     cfp: CfP
 
 home:
-    welcome: Bienvenido a JSDayES 2017
-    text1: Charlas & Talleres
+    welcome: Welcome to JSDayES 2017
+    text1: Talks & Workshops
     text2: JavaScript, NodeJS, AngularJS, Polymer...
-    text3: Café & Empanada
+    text3: Coffee & Pie
+    date: 5 & 6 May 2017 <br/> Madrid
 
 speakers:
     title: Speakers
     description:  >
-        Hemos seleccionado los mejores ponentes para que nos cuenten
-        su experiencia con las tecnologías de JavaScript.
+        We have selected the best speakers to  tell us
+        their experience with Javascript.
+
+cfp:
+    title: Submit your paper
+    join: Join us!
+    description: Do you want to give a talk? <br> Do not think about it. Access and sign up!
+    dates: Important dates
+    limit: Limit for submitting proposals.
+    datelimit: February 28th, 2017
+    notification: Date when we'll communicate accepted proposals.
+    notificationTitle: Notification of acceptance
+    notificationlimit: March 2017
+
+eventPresentation:
+    title: <span class="name">JSDayES</span> Spain’s largest Javascript Conference
+    description: <strong>JSDayES</strong> is a two-day multi-track conference (English & Spanish) focused in Javascript y and its ecosystem.
+    description2: JavaScript, NodeJS, React, AngularJS, Polymer... Are you going to miss it?
 
 schedule:
-    title: Programa
-    description1: Las mejores sesiones sobre el ecosistema tecnológico de JavaScript.
-    description2: Un día entero de talleres y otro de apasionantes charlas.
+    title: Schedule
+    description1: The best talks about the technology ecosystem of JavaScript.
+    description2: Two days with talks and workshops.
 
 contact:
-    title: Contacto
-    description: Para cualquier duda o sugerencia que tengas,<br> No dudes en ponerte en contacto nos nosotros.
-    button: Contacta con Nosotros
+    title: Contact
+    description: For any doubt or suggestion you have, <br/> don't hesitate to contact us.
+    button: Contact us
 
 organizers:
-    title: Organizadores
-    description: Detrás de este evento estamos un grupo de comunidades de interés <br> relacionadas con el uso de tecnologías centradas en JavaScript.
+    title: Organizers
+    description: Behind this event we are a group of communities<br/> related to the use of technologies focused on JavaScript.
 
 codeOfConduct:
-    title: Código de conducta
-    description: El evento se regirá por este <a href="/codeofconduct.html">código de conducta</a>, que puede resumirse en: respeta a los demás.
+    title: Code of conduct
+    description: The event will be governed by this <a href="/codeofconduct.html">code of conduct</a>, which can be summarized in: respects others.
 
 sponsors:
     title: Sponsors
-    description: Patrocinar ofrece una oportunidad única para exponer tu marca y encontrar talentos y perfiles especializados en tecnologías JavaScript.
-    button: Apúntate como spónsor
+    description: Sponsoring offers a unique opportunity to expose your brand and find talents and profiles specialized in JavaScript technologies.
+    button: Sign up as a sponsor
+
+sponsorsInfo:
+    title: Sponsorship models
+    allowed: Allowed
+    notallowed: Not allowed
+    logo: Logo on the web
+    acknowledgment: Thanks at the event
+    printLogo: Logo in printed material
+    logoscreen: Logo in event screen
+    presentation: 5 minutes presentation
+    table: Table with own roll up
+    press: Reference in press and social media
+    welcomePack: Flyer or gift in Welcome Pack
+    mailing: Standalone mailing
+    dinner: Dinner with speakers and organization
+    person: person
+    people: people
+    ticket: ticket
+    tickets: tickets
+    sponsorticket: Complimentary ticket
 
 footer:
-    twitter: Twitter de JSDayES
-    youtube: Canal Youtube de JSDayES
-    google: Google Plus de JSDayES
-    copyright: JSDayES - 3a Edición &copy; Mayo 2017
+    twitter: JSDayES Twitter
+    youtube: JSDayES Youtube
+    google: JSDayES Google Plus
+    copyright: JSDayES - 3rd Edition &copy; May 2017
