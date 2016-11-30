@@ -37,7 +37,7 @@ cfp:
 
 eventPresentation:
     title: <span class="name">JSDayES</span> Spain’s largest Javascript Conference
-    description: <strong>JSDayES</strong> is a two-day multi-track conference (English & Spanish) focused in Javascript y and its ecosystem.
+    description: <strong>JSDayES</strong> is a two-day multi-track conference (English & Spanish) focused in Javascript and its ecosystem.
     description2: JavaScript, NodeJS, React, AngularJS, Polymer... Are you going to miss it?
 
 schedule:
