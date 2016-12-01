@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Félix Zapata",
   "scripts": {
-    "updateWeb": "rm -rf jsdayeS.github.io && cp -r dist/* jsdayeS.github.io"
+    "updateWeb": "rm -rf jsdayes.github.io/* && cp -r dist/* jsdayes.github.io"
   },
   "devDependencies": {
     "del": "^2.2.0",
