@@ -19,16 +19,16 @@ $.backstretch([
     duration: 4000
 });
 
-var bLazy = new Blazy({
-    selector: 'img, iframe',
-    offset: 150,
-    success: function(element) {
-        setTimeout(function(){
-	       var parent = element.parentNode;
-	          parent.className = parent.className.replace(/\bloading\b/,'');
-        }, 200);
-    }
-});
+// var bLazy = new Blazy({
+//     selector: 'img, iframe',
+//     offset: 150,
+//     success: function(element) {
+//         setTimeout(function(){
+// 	       var parent = element.parentNode;
+// 	          parent.className = parent.className.replace(/\bloading\b/,'');
+//         }, 200);
+//     }
+// });
 
 //menu shrink
 $(document).on("scroll", function () {

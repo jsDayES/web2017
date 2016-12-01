@@ -132,6 +132,7 @@ gulp.task ('server', function () {
 gulp.task ('server:dist', ['dist'], function () {
     gulp.src ('dist/')
         .pipe (webserver ({
+            host: '192.168.0.13',
             port             : 5000,
             livereload       : false,
             directoryListing : {

@@ -215,7 +215,6 @@ Home style
         left: 0; }
     #home .welcomeLogo {
         position: relative;
-        width: 403px;
         margin: 0 auto;
     }
 
@@ -853,7 +852,18 @@ By ADAMSCHWARTZ
   to {
     transform: rotateY(360deg); } }
 /*************resposnive css***********/
+@media (min-width: 1024px) {
+    #home .welcomeLogo {
+        width: 403px;
+    }
+}
+
 @media (max-width: 768px) {
+  #home .date {
+    position: relative;
+    top: auto;
+    left: auto;
+  }
   #home .home-inner .flexslider .slides li {
     font-size: 30px;
     line-height: 30px; }
