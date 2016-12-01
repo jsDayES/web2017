@@ -15,7 +15,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
-
 a {
   color: #f2b84b; }
   a i {
@@ -642,6 +641,7 @@ Organizers style
     margin-right: 15px; }
 
 .organizers-slider {
+  display: flex;
   position: relative; }
   .organizers-slider .owl-buttons {
     margin-top: 10px;

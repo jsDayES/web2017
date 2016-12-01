@@ -46,6 +46,7 @@ var paths = {
         './js/pace.min.js',
         './js/wow.min.js',
         './js/jqBootstrapValidation.js',
+        './node_modules/blazy/blazy.js',
         './js/custom.js',
         './js/jquery.countdown.min.js'
     ],

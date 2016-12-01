@@ -64,7 +64,7 @@
                         <div class="col-sm-8 col-sm-offset-2 text-center">
                             <div class="overImg welcome">
                               <div class="welcomeLogo">
-                                  <img src="img/logo.png" class="img-logo" alt="Logo JSDay 2017">
+                                  <img data-src="img/logo.png" class="img-logo" alt="Logo JSDay 2017">
                                   <span class="date">${{ text.home.date }}$</span>
                               </div>
                               <h1>${{ text.home.welcome }}$</h1>
@@ -312,7 +312,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-3">
-                         <iframe width="560" height="315" src="https://www.youtube.com/embed/UQ2tKT_tS90" frameborder="1" allowfullscreen></iframe>
+                         <iframe width="560" height="315" data-src="https://www.youtube.com/embed/UQ2tKT_tS90" frameborder="1" allowfullscreen></iframe>
                     </div>
                 </div>
                 <div class="row hide-${{ _lang_ }}$">
@@ -521,22 +521,22 @@
                     <ul id="organizers-slider" class="organizers-slider">
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/Madrid-Polymer-Group/"><img src="img/organizacion/organizer-4.png" width="231" height="80" class="img-responsive" alt="Madrid Polymer Group"></a>
+                                <a href="http://www.meetup.com/es-ES/Madrid-Polymer-Group/"><img data-src="img/organizacion/organizer-4.png" width="231" height="80" class="img-responsive" alt="Madrid Polymer Group"></a>
                             </div>
                         </li>
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/Node-js-Madrid/"><img src="img/organizacion/organizer-2.png" width="268" height="85" class="img-responsive" alt="NodeJS Madrid"></a>
+                                <a href="http://www.meetup.com/es-ES/Node-js-Madrid/"><img data-src="img/organizacion/organizer-2.png" width="268" height="85" class="img-responsive" alt="NodeJS Madrid"></a>
                             </div>
                         </li>
                         <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/madridjs/"><img src="img/organizacion/organizer-3.png" width="268" height="84" class="img-responsive" alt="Madrid JS"></a>
+                                <a href="http://www.meetup.com/es-ES/madridjs/"><img data-src="img/organizacion/organizer-3.png" width="268" height="84" class="img-responsive" alt="Madrid JS"></a>
                             </div>
                         </li>
                          <li class="item">
                             <div class="organizers-box">
-                                <a href="http://www.meetup.com/es-ES/AngularJS_Madrid/"><img src="img/organizacion/organizer-1.png" width="242" height="86" class="img-responsive" alt="AngularJS Madrid"></a>
+                                <a href="http://www.meetup.com/es-ES/AngularJS_Madrid/"><img data-src="img/organizacion/organizer-1.png" width="242" height="86" class="img-responsive" alt="AngularJS Madrid"></a>
                             </div>
                         </li>
                         <!-- <li class="item">
@@ -1057,6 +1057,7 @@
         <script src="js/pace.min.js"></script>
         <script src="js/wow.min.js"></script>
         <script src="js/jqBootstrapValidation.js"></script>
+        <script src="node_modules/blazy/blazy.js"></script>
         <script src="js/custom.js"></script>
         <!-- endbuild-->
 

@@ -5,15 +5,30 @@
  */
 
 //backstretch
+
 $.backstretch([
-    "/web2017/img/img-1.jpg",
-    "/web2017/img/img-2.jpg",
-    "/web2017/img/img-3.jpg"
+   "/web2017/img/gallery1/img-1.jpg",
+   "/web2017/img/gallery1/JSDAYES2016-301.jpg",
+   "/web2017/img/gallery1/JSDAYES2016-240.jpg",
+   "/web2017/img/gallery1/img-3.jpg",
+   "/web2017/img/gallery1/JSDAYES2016-3.jpg",
+   "/web2017/img/gallery1/JSDAYES2016-312.jpg"
 ], {
+    lazyload: true,
     fade: 750,
     duration: 4000
 });
 
+var bLazy = new Blazy({
+    selector: 'img, iframe',
+    offset: 150,
+    success: function(element) {
+        setTimeout(function(){
+	       var parent = element.parentNode;
+	          parent.className = parent.className.replace(/\bloading\b/,'');
+        }, 200);
+    }
+});
 
 //menu shrink
 $(document).on("scroll", function () {
@@ -101,17 +116,17 @@ $(document).ready(function () {
         navigationText:	["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"]
     });
 
-        $("#organizers-slider").owlCarousel({
-        autoPlay: 3000, //Set AutoPlay to 3 seconds
-        items: 4,
-        itemsDesktop: [1199, 3],
-        itemsDesktopSmall: [979, 3],
-        itemsTablet: [768, 2],
-        itemsMobile: [479,1],
-        pagination:false,
-        navigation:true,
-        navigationText:	["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"]
-    });
+    //     $("#organizers-slider").owlCarousel({
+    //     autoPlay: 3000, //Set AutoPlay to 3 seconds
+    //     items: 4,
+    //     itemsDesktop: [1199, 3],
+    //     itemsDesktopSmall: [979, 3],
+    //     itemsTablet: [768, 2],
+    //     itemsMobile: [479,1],
+    //     pagination:false,
+    //     navigation:true,
+    //     navigationText:	["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"]
+    // });
 
 });
 $('#gallery-slider').masonry({
