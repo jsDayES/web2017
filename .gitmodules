@@ -1,0 +1,6 @@
+[submodule "jsDayES.github.io"]
+	path = jsDayES.github.io
+	url = git@github.com:jsDayES/jsDayES.github.io.git
+[submodule "jsdayes.github.io"]
+	path = jsdayes.github.io
+	url = git@github.com:jsDayES/jsdayes.github.io.git

@@ -2,6 +2,9 @@
   "name": "MadridJSDay",
   "version": "1.0.0",
   "author": "Félix Zapata",
+  "scripts": {
+    "updateWeb": "rm -rf jsdayeS.github.io && cp -r dist/* jsdayeS.github.io"
+  },
   "devDependencies": {
     "del": "^2.2.0",
     "fs": "^0.0.2",

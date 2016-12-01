@@ -51,12 +51,12 @@ var paths = {
         './js/jquery.countdown.min.js'
     ],
     images : './img/**/*',
-    dist   : './web2017/'
+    dist   : './dist/'
 };
 
 gulp.task ('clean', function () {
     return del ([
-        './web2017/**',
+        './dist/**',
     ]);
 });
 
@@ -130,14 +130,13 @@ gulp.task ('server', function () {
 });
 
 gulp.task ('server:dist', ['dist'], function () {
-    gulp.src ('.')
+    gulp.src ('dist/')
         .pipe (webserver ({
             port             : 5000,
             livereload       : false,
             directoryListing : {
                 enable : false,
-            },
-            open             : 'web2017'
+            }
         }));
 });
 
