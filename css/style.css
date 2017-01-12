@@ -899,4 +899,25 @@ By ADAMSCHWARTZ
     padding-bottom: 20px;
 }
 
+.cfp-page {
+    padding: 100px 0 100px;
+    background-color: #f1f1f1;
+    font-size: 22px;
+    line-height: normal;
+}
+
+.cfp-page .submit-talk {
+    margin: 60px 0;
+    text-align: center;
+}
+
+.cfp-page h1 {
+    font-size: 40px;
+}
+
+.cfp-page h2 {
+    padding-top: 20px;
+    font-size: 35px;
+}
+
 /*# sourceMappingURL= style.css.map */

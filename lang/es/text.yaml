@@ -30,7 +30,7 @@ cfp:
     description: ¿Quieres participar como ponente dando una charla? <br> No te lo pienses. Accede al formulario e incribe tu propuesta.
     dates: Fechas Importantes
     limit: Límite para envío de propuestas.
-    datelimit: 28/02/2017
+    datelimit: 01/02/2017
     notification: Fecha en que comunicaremos las propuestas aceptadas
     notificationTitle: Notificación de Aceptación
     notificationlimit: 03/2017

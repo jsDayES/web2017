@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="${{ _lang_ }}$">
     <head>
         <script>
         var language = navigator.language || navigator.browserLanguage;
@@ -47,11 +47,11 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav scroll-to navbar-right">
                         <li><a href="#home">${{ text.header.home }}$</a></li>
-                         <li><a href="#proposals">${{ text.header.cfp }}$</a></li>
+                        <li><a href="#proposals">${{ text.header.cfp }}$</a></li>
                         <!-- <li><a href="#streaming">${{ text.header.streaming }}$</a></li> -->
                         <!-- <li><a href="#speakers">${{ text.header.speakers }}$</a></li>
                         <li><a href="#schedule">${{ text.header.schedule }}$</a></li> -->
-                        <li><a href="#where">${{ text.header.where }}$</a></li>
+                        <!-- <li><a href="#where">${{ text.header.where }}$</a></li> -->
                         <!-- <li><a href="#tickets">${{ text.header.tickets }}$</a></li> -->
                         <li><a href="#organizers">${{ text.header.organizers }}$</a></li>
                         <li><a href="#sponsors">${{ text.header.sponsors }}$</a></li>
@@ -310,7 +310,8 @@
                         <p>${{ text.eventPresentation.description2 }}$<p>
                     </div>
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
-                        <a target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312#/" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
+                        <a target="_blank" href="/call-for-proposals-${{ _lang_ }}$.html" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
+                        <!-- <a target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312#/" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a> -->
                     </div>
                 </div>
                 <div class="row">
@@ -398,7 +399,8 @@
                 </div> <br><br>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <a target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312#/" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
+                        <a target="_blank" href="/call-for-proposals-${{ _lang_ }}$.html" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a>
+                        <!-- <a target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312#/" class="btn btn-dark btn-lg">${{ text.cfp.title }}$</a> -->
                     </div>
                 </div>
             </div>

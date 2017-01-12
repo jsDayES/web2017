@@ -30,7 +30,7 @@ cfp:
     description: Do you want to give a talk? <br> Do not think about it. Access and sign up!
     dates: Important dates
     limit: Limit for submitting proposals.
-    datelimit: February 28th, 2017
+    datelimit: February 1st, 2017
     notification: Date when we'll communicate accepted proposals.
     notificationTitle: Notification of acceptance
     notificationlimit: March 2017

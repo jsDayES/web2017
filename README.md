@@ -8,3 +8,9 @@ npm install
 ```shell
 gulp
 ```
+
+## Push web
+
+```shell
+npm run updateWeb
+```

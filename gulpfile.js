@@ -98,14 +98,18 @@ gulp.task ('fonts', function () {
 });
 
 gulp.task ('html', function () {
-    return gulp.src (['index.html'])
+    return gulp.src ([
+            'index.html',
+            'codigodeconducta.html',
+            'call-for-proposals-en.html',
+            'call-for-proposals-es.html'
+        ])
         .pipe(i18n({
             createLangDirs: true,
             defaultLang: 'en',
             langDir: './lang',
             trace: true,
         }))
-        .pipe(addsrc(['codigodeconducta.html', 'codeofconduct.html']))
         .pipe ($.useref ())
         .pipe ($.minifyHtml ({
             quotes : true,
