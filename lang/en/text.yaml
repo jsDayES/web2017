@@ -15,7 +15,6 @@ home:
     welcome: Welcome to JSDayES 2017
     text1: Talks & Workshops
     text2: JavaScript, NodeJS, AngularJS, Polymer...
-    text3: Coffee & Pie
     date: 5 & 6 May 2017 <br/> Madrid
 
 speakers:
@@ -30,7 +29,7 @@ cfp:
     description: Do you want to give a talk? <br> Do not think about it. Access and sign up!
     dates: Important dates
     limit: Limit for submitting proposals.
-    datelimit: February 1st, 2017
+    datelimit: January 31th, 2017
     notification: Date when we'll communicate accepted proposals.
     notificationTitle: Notification of acceptance
     notificationlimit: March 2017

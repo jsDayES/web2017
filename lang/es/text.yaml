@@ -14,8 +14,7 @@ header:
 home:
     welcome: Bienvenido a JSDayES 2017
     text1: Charlas & Talleres
-    text2: JavaScript, NodeJS, AngularJS, Polymer...
-    text3: Café & Empanada
+    text2: JavaScript, NodeJS, Angular, Polymer...
     date: 5 y 6 Mayo 2017 <br/> Madrid
 
 speakers:
@@ -30,7 +29,7 @@ cfp:
     description: ¿Quieres participar como ponente dando una charla? <br> No te lo pienses. Accede al formulario e incribe tu propuesta.
     dates: Fechas Importantes
     limit: Límite para envío de propuestas.
-    datelimit: 01/02/2017
+    datelimit: 31/01/2017
     notification: Fecha en que comunicaremos las propuestas aceptadas
     notificationTitle: Notificación de Aceptación
     notificationlimit: 03/2017
@@ -47,7 +46,7 @@ schedule:
 
 contact:
     title: Contacto
-    description: Para cualquier duda o sugerencia que tengas,<br> No dudes en ponerte en contacto nos nosotros.
+    description: Para cualquier duda o sugerencia que tengas,<br> No dudes en ponerte en contacto con nosotros.
     button: Contacta con Nosotros
 
 organizers:
