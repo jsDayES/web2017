@@ -32,7 +32,7 @@ cfp:
     datelimit: 31/01/2017
     notification: Fecha en que comunicaremos las propuestas aceptadas
     notificationTitle: Notificación de Aceptación
-    notificationlimit: 03/2017
+    notificationlimit: 02/2017
 
 eventPresentation:
     title: <span class="name">JSDayES</span> la conferencia de JavaScript más grande de España

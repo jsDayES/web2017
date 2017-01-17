@@ -32,7 +32,7 @@ cfp:
     datelimit: January 31th, 2017
     notification: Date when we'll communicate accepted proposals.
     notificationTitle: Notification of acceptance
-    notificationlimit: March 2017
+    notificationlimit: February 2017
 
 eventPresentation:
     title: <span class="name">JSDayES</span> Spain’s largest Javascript Conference
