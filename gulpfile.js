@@ -101,6 +101,7 @@ gulp.task ('html', function () {
     return gulp.src ([
             'index.html',
             'codigodeconducta.html',
+            'codeofconduct.html',
             'call-for-proposals-en.html',
             'call-for-proposals-es.html'
         ])
