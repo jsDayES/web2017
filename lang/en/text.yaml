@@ -90,6 +90,7 @@ tickets:
     point2: Lunch (13 May)
     point3: Pack JSDayEs
     buy: Buy
+    soldout: Sold out
 
 footer:
     twitter: JSDayES Twitter

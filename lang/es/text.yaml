@@ -90,6 +90,7 @@ tickets:
     point2: Comida (13 May)
     point3: Pack JSDayEs
     buy: Comprar
+    soldout: Agotadas
 
 footer:
     twitter: Twitter de JSDayES
