@@ -15,7 +15,7 @@ home:
     welcome: Bienvenido a JSDayES 2017
     text1: Charlas & Talleres
     text2: JavaScript, NodeJS, Angular, Polymer...
-    date: 5 y 6 Mayo 2017 <br/> Madrid
+    date: 12 y 13 Mayo 2017 <br/> Madrid
 
 speakers:
     title: Speakers
@@ -81,6 +81,15 @@ sponsorsInfo:
     ticket: ticket
     tickets: tickets
     sponsorticket: Entradas de cortesía
+
+tickets:
+    title: Entradas
+    early: Early Bird
+    earlyprice: 25€
+    point1: Acceso 2 días
+    point2: Comida (13 May)
+    point3: Pack JSDayEs
+    buy: Comprar
 
 footer:
     twitter: Twitter de JSDayES
