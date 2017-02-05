@@ -84,8 +84,10 @@ sponsorsInfo:
 
 tickets:
     title: Entradas
+    superearly: Super Early Bird
+    superearlyprice: 25€
     early: Early Bird
-    earlyprice: 25€
+    earlyprice: 50€
     point1: Acceso 2 días
     point2: Comida (13 May)
     point3: Pack JSDayEs
