@@ -66,6 +66,11 @@ gulp.task ('images', function () {
         .pipe (gulp.dest (paths.dist + '/img/'));
 });
 
+gulp.task ('ico', function () {
+    return gulp.src ('favicon.ico')
+        .pipe (gulp.dest (paths.dist));
+});
+
 gulp.task ('js', function () {
     return gulp.src (paths.js)
         .pipe ($.concat ('main.js',{newLine: ';'}))
@@ -120,7 +125,7 @@ gulp.task ('html', function () {
     .pipe(gulp.dest (paths.dist))
 });
 
-gulp.task ('build', ['images', 'fonts', 'koliseo', 'js', 'css', 'html']);
+gulp.task ('build', ['images', 'ico', 'fonts', 'koliseo', 'js', 'css', 'html']);
 
 gulp.task ('server', function () {
     gulp.src ('.')
