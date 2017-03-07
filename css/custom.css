@@ -188,3 +188,7 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
 #event-presentation {
     padding-top: 80px;
 }
+
+#tickets .workshop ul {
+    padding-bottom: 90px;
+}

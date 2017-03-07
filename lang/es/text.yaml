@@ -94,6 +94,9 @@ tickets:
     point3: Pack JSDayEs
     buy: Comprar
     soldout: Agotadas
+    specialWorkshop: Workshop con @substack
+    specialWorkshopPrice: 80€
+    specialWorkshopDesc: Hands On: The Modular Web! by <a target="_blank" href="https://twitter.com/substack">@substack</a>
 
 footer:
     twitter: Twitter de JSDayES
