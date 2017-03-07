@@ -184,3 +184,7 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
   .box { height:auto; background:transparent; }
   .box img {display:block; margin:0 auto; transform: initial }
 }
+
+#event-presentation {
+    padding-top: 80px;
+}
