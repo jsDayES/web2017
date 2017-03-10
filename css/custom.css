@@ -192,3 +192,7 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
 #tickets .workshop ul {
     padding-bottom: 90px;
 }
+
+.list-inline.social {
+    min-height: 38px;
+}
