@@ -97,6 +97,8 @@ tickets:
     specialWorkshop: Workshop with @substack
     specialWorkshopPrice: 80€
     specialWorkshopDesc: Hands On: The Modular Web! by <a target="_blank" href="https://twitter.com/substack">@substack</a>
+    normal: Regular
+    normalTicketPrice: 80€
 
 footer:
     twitter: JSDayES Twitter

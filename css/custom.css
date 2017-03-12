@@ -193,6 +193,15 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
     padding-bottom: 90px;
 }
 
+#tickets .tickets-row {
+    display: flex;
+    justify-content: center;
+}
+
+#tickets .tickets-row-1 {
+    margin-bottom: 20px;
+}
+
 .list-inline.social {
     min-height: 38px;
 }
