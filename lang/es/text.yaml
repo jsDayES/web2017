@@ -11,6 +11,9 @@ header:
     sponsors: Sponsors
     cfp: CfP
 
+where:
+    transport: Transporte
+
 home:
     welcome: Bienvenido a JSDayES 2017
     text1: Charlas & Talleres
