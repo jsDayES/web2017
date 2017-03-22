@@ -228,7 +228,7 @@ var AgendaDayTableModel = (function () {
 
 exports.AgendaDayTableModel = AgendaDayTableModel;
 
-},{"lodash/collection/find":12}],2:[function(require,module,exports){
+},{"lodash/collection/find":14}],2:[function(require,module,exports){
 /**
 
   Render a day table of talks as HTML
@@ -243,9 +243,15 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _feedback = require('./feedback');
+
+var _LikeButtonUtils = require('./LikeButtonUtils');
+
+var _LikeButtonUtils2 = _interopRequireDefault(_LikeButtonUtils);
 
 var AgendaDayTemplate = (function () {
   function AgendaDayTemplate(model) {
@@ -317,7 +323,7 @@ var AgendaDayTemplate = (function () {
       var videoUrl = _ref3.videoUrl;
       var slidesUrl = _ref3.slidesUrl;
 
-      return '\n      <p>\n        <a href="#' + hash + '" data-id="' + id + '" data-hash="' + hash + '" class="ka-talk-title">' + title + '</a>\n      </p>\n      ' + (!videoUrl && !slidesUrl ? '' : '<p class="ka-links">\n        ' + (!slidesUrl ? '' : '<a href="' + slidesUrl + '" target="_blank" class="icon-slideshare" title="Slides"><span class="sr-only">Slides in new window of "' + title + '"</span></a>') + '\n        ' + (!videoUrl ? '' : '<a href="' + videoUrl + '" target="_blank" class="icon-youtube-play" title="Video"><span class="sr-only">Video in new window of "' + title + '"</span></a>') + '\n      </p>') + '\n      <div class="ka-feedback-footer">' + new _feedback.TalkFeedback(arguments[0]).renderFeedback() + '</div>\n      <p class="ka-author-brief">' + authors.map(function (a) {
+      return '\n      ' + _LikeButtonUtils2['default'].renderButton(id) + '\n      <p>\n        <a href="#' + hash + '" data-id="' + id + '" data-hash="' + hash + '" class="ka-talk-title">' + title + '</a>\n      </p>\n      ' + (!videoUrl && !slidesUrl ? '' : '<p class="ka-links">\n        ' + (!slidesUrl ? '' : '<a href="' + slidesUrl + '" target="_blank" class="icon-slideshare" title="Slides"><span class="sr-only">Slides in new window of "' + title + '"</span></a>') + '\n        ' + (!videoUrl ? '' : '<a href="' + videoUrl + '" target="_blank" class="icon-youtube-play" title="Video"><span class="sr-only">Video in new window of "' + title + '"</span></a>') + '\n      </p>') + '\n      <div class="ka-feedback-footer">' + new _feedback.TalkFeedback(arguments[0]).renderFeedback() + '</div>\n      <p class="ka-author-brief">' + authors.map(function (a) {
         return _this2.renderAuthor(a);
       }).join(', ') + '</p>\n      ';
     }
@@ -341,7 +347,7 @@ var AgendaDayTemplate = (function () {
 
 exports.AgendaDayTemplate = AgendaDayTemplate;
 
-},{"./feedback":5}],3:[function(require,module,exports){
+},{"./LikeButtonUtils":5,"./feedback":7}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -349,6 +355,8 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
@@ -359,6 +367,14 @@ var _AgendaDayTableModel = require('./AgendaDayTableModel');
 var _util = require('./util');
 
 var _TalkDetailsPopup = require('./TalkDetailsPopup');
+
+var _KoliseoAPI = require('./KoliseoAPI');
+
+var _KoliseoAPI2 = _interopRequireDefault(_KoliseoAPI);
+
+var _LikeButtonUtils = require('./LikeButtonUtils');
+
+var _LikeButtonUtils2 = _interopRequireDefault(_LikeButtonUtils);
 
 /**
 
@@ -412,26 +428,37 @@ var AgendaView = (function () {
     // the DOM element to modify
     this.element = element;
 
-    Koliseo.auth.on('koliseo.login', this.renderUserInfo);
-    Koliseo.auth.on('koliseo.logout', this.renderUserInfo);
+    if (_KoliseoAPI2['default'].isOAuthConfigured()) {
+      _KoliseoAPI2['default'].on('login', this.renderUserInfo);
+      _KoliseoAPI2['default'].on('logout', this.renderUserInfo);
+      this.element.onclick = _LikeButtonUtils2['default'].onClickListener;
+      _LikeButtonUtils2['default'].addUpdateListener(this.element);
+    }
   }
 
   _createClass(AgendaView, [{
     key: 'render',
     value: function render() {
       var dayId = !location.hash ? '' : /#([^\/]+)(\/.+)?/.exec(location.hash)[1];
-      var talkHash = dayId && location.hash.substring(1);
+
+			// default secondon day
+			if (this.days[1]) {
+				dayId = this.days[1].id + "";
+			}
+
+      var talkHash = null;
       var html = (this.days.length > 1 ? this.renderDayTabs() : '<div class="ka-right" id="ka-user-info"></div><h2 class="kday-title">' + this.days[0].name + '</h2>') + this.renderWorkspace() + this.renderHint();
       this.element.classList.add('ka');
       this.element.innerHTML = html;
       document.body.addEventListener('click', this.onClick.bind(this));
       document.body.addEventListener('keyup', this.onKeyPress.bind(this));
-
       this.selectDay(dayId);
       var talk = this.selectTalk(talkHash);
       this.scrollToTalk(talk);
 
-      this.renderUserInfo();
+      if (_KoliseoAPI2['default'].isOAuthConfigured()) {
+        this.renderUserInfo();
+      }
     }
   }, {
     key: 'renderDayTabs',
@@ -450,7 +477,8 @@ var AgendaView = (function () {
     key: 'renderUserInfo',
     value: function renderUserInfo() {
       var container = document.getElementById('ka-user-info');
-      container.innerHTML = !Koliseo.auth.currentUser ? '<button onclick="Koliseo.auth.login()" class="ka-button">Sign in</button>' : '<button onclick="Koliseo.auth.logout()" class="ka-button ka-button-secondary">Sign out</button>';
+      container.innerHTML = !_KoliseoAPI2['default'].currentUser ? '<button class="ka-button">Sign in</button>' : '<button class="ka-button ka-button-secondary">Sign out</button>';
+      container.onclick = !_KoliseoAPI2['default'].currentUser ? _KoliseoAPI2['default'].login : _KoliseoAPI2['default'].logout;
     }
   }, {
     key: 'renderWorkspace',
@@ -603,19 +631,31 @@ var AgendaView = (function () {
       if (this.selectedTalkHash && !event.altKey && !event.ctrlKey && !event.shiftKey) {
         var keyCode = event.keyCode;
         if (keyCode == 27) {
-          this.modal.close();
+          this.onClose();
         }
-
-        var rowDelta = keyCode == 38 ? -1 : keyCode == 40 ? 1 : 0;
-        var colDelta = keyCode == 37 ? -1 : keyCode == 39 ? 1 : 0;
+        /*
+        const rowDelta =
+          keyCode == 38? -1 :
+          keyCode == 40? 1 :
+          0;
+        const colDelta =
+          keyCode == 37? -1 :
+          keyCode == 39? 1 :
+          0;
         if (rowDelta || colDelta) {
-          var fadeInClass = rowDelta == -1 ? 'up' : rowDelta == 1 ? 'down' : colDelta == -1 ? 'left' : colDelta == 1 ? 'right' : '';
-          var talk = this.getSelectedTableModel().findTalk(this.selectedTalkCoords, { rowDelta: rowDelta, colDelta: colDelta });
+          const fadeInClass =
+            rowDelta == -1? 'up' :
+            rowDelta == 1? 'down' :
+            colDelta == -1? 'left' :
+            colDelta == 1? 'right' :
+            '';
+          const talk = this.getSelectedTableModel().findTalk(this.selectedTalkCoords, { rowDelta, colDelta});
           if (talk) {
             this.selectTalk(talk.contents.hash, fadeInClass);
             event.preventDefault();
           }
         }
+        */
       }
     }
   }]);
@@ -627,7 +667,7 @@ var AgendaView = (function () {
 
 exports.AgendaView = AgendaView;
 
-},{"./AgendaDayTableModel":1,"./AgendaDayTemplate":2,"./TalkDetailsPopup":4,"./util":9}],4:[function(require,module,exports){
+},{"./AgendaDayTableModel":1,"./AgendaDayTemplate":2,"./KoliseoAPI":4,"./LikeButtonUtils":5,"./TalkDetailsPopup":6,"./util":11}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -636,6 +676,305 @@ Object.defineProperty(exports, '__esModule', {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _hellojs = require('hellojs');
+
+var _hellojs2 = _interopRequireDefault(_hellojs);
+
+var HOSTNAME = location.hostname == 'localhost' ? 'http://localhost:8888/' : 'https://www.koliseo.com/';
+
+var defaultErrorHandler = function defaultErrorHandler(e, successCallback) {
+  if (e && e.error) {
+    // check some UC that hellojs see as errors and we do not
+    if ("empty_response" === e.error.code) {
+      successCallback && successCallback(undefined);
+    }
+    // usually this is because of an invalid token or an expired token
+    if ("access_denied" === e.error.code) {
+      _hellojs2['default'].logout();
+      return false;
+    }
+  }
+  return e;
+};
+
+var KoliseoAPI = (function () {
+  function KoliseoAPI() {
+    var _this = this;
+
+    _classCallCheck(this, KoliseoAPI);
+
+    _hellojs2['default'].on('auth.login', function (auth) {
+      (0, _hellojs2['default'])(auth.network).api('me').then(function (user) {
+        _this.currentUser = user;
+        _hellojs2['default'].emit('login');
+      }, defaultErrorHandler);
+    });
+
+    _hellojs2['default'].on('auth.logout', function (r) {
+      _this.currentUser = undefined;
+      _hellojs2['default'].emit('logout');
+    });
+  }
+
+  _createClass(KoliseoAPI, [{
+    key: 'init',
+    value: function init(_ref) {
+      var _ref$baseUrl = _ref.baseUrl;
+      var baseUrl = _ref$baseUrl === undefined ? HOSTNAME : _ref$baseUrl;
+      var c4pUrl = _ref.c4pUrl;
+      var oauthClientId = _ref.oauthClientId;
+
+      this.c4pUrl = c4pUrl;
+      this.oauthClientId = oauthClientId;
+
+      if (oauthClientId) {
+        _hellojs2['default'].init({ koliseo: oauthClientId });
+      } else {
+        console.warn('Some features have been disabled because oauthClientId has not been declared');
+      }
+
+      _hellojs2['default'].init({
+
+        koliseo: {
+
+          name: 'Koliseo',
+
+          oauth: {
+            version: 2,
+            auth: baseUrl + 'login/auth',
+            grant: baseUrl + 'login/auth/token',
+            redirect_uri: window.location.href.split('#')[0]
+          },
+
+          scope: {
+            basic: 'talks.feedback'
+          },
+
+          // API base URI
+          base: baseUrl,
+
+          // Map GET requests
+          get: {
+            me: 'users/current'
+          },
+
+          // Map POST requests
+          post: {},
+
+          // Map PUT requests
+          put: {},
+
+          // Map DELETE requests
+          del: {},
+
+          xhr: function xhr(p) {
+            var token = p.query.access_token;
+            delete p.query.access_token;
+            p.headers = p.headers || {};
+            if (token) {
+              p.headers["Authorization"] = "Bearer " + token;
+            }
+            p.headers['Content-Type'] = 'application/json';
+            p.headers['Accept'] = 'application/json';
+            if (p.method === 'post' || p.method === 'put') {
+              p.data = JSON.stringify(p.data);
+            }
+            return true;
+          }
+
+        }
+      }, {
+        display: 'page',
+        default_service: 'koliseo',
+        force: false
+      });
+    }
+  }, {
+    key: 'on',
+    value: function on(eventName, callback) {
+      _hellojs2['default'].on(eventName, callback);
+    }
+  }, {
+    key: 'off',
+    value: function off(eventName, callback) {
+      _hellojs2['default'].off(eventName, callback);
+    }
+  }, {
+    key: 'emit',
+    value: function emit(eventName, value) {
+      _hellojs2['default'].emit(eventName, value);
+    }
+  }, {
+    key: 'isOAuthConfigured',
+    value: function isOAuthConfigured() {
+      return !!this.oauthClientId;
+    }
+  }, {
+    key: 'login',
+    value: function login(e) {
+      e && e.preventDefault();
+      _hellojs2['default'].login();
+    }
+  }, {
+    key: 'logout',
+    value: function logout(e) {
+      e && e.preventDefault();
+      _hellojs2['default'].logout();
+    }
+  }, {
+    key: 'sendFeedback',
+    value: function sendFeedback(_ref2, callback) {
+      var id = _ref2.id;
+      var rating = _ref2.rating;
+      var comment = _ref2.comment;
+
+      _hellojs2['default'].api(this.c4pUrl + '/proposals/@{id}/feedback', 'post', { id: id, rating: rating, comment: comment }).then(callback, function (error) {
+        defaultErrorHandler(error, callback);
+      });
+    }
+  }, {
+    key: 'getFeedbackEntries',
+    value: function getFeedbackEntries(id, cursor, callback) {
+      var _this2 = this;
+
+      var successCallback = (function (resp) {
+        callback(resp.data);
+        if (resp.cursor) {
+          _this2.getFeedbackEntries(id, resp.cursor, callback);
+        }
+      }).bind(this);
+      _hellojs2['default'].api(this.c4pUrl + '/proposals/' + id + '/feedback?' + (cursor ? 'cursor=' + cursor : '')).then(successCallback, function (error) {
+        defaultErrorHandler(error, callback);
+      });
+    }
+  }, {
+    key: 'getCurrentUserLikes',
+    value: function getCurrentUserLikes() {
+      return _hellojs2['default'].api(this.c4pUrl + '/agenda/likes');
+    }
+  }, {
+    key: 'addLike',
+    value: function addLike(talkId) {
+      return _hellojs2['default'].api(this.c4pUrl + '/agenda/likes/' + talkId, 'post').then(function () {
+        _hellojs2['default'].emit('likes.add', talkId);
+      });
+    }
+  }, {
+    key: 'removeLike',
+    value: function removeLike(talkId) {
+      return _hellojs2['default'].api(this.c4pUrl + '/agenda/likes/' + talkId, 'delete').then(function () {
+        _hellojs2['default'].emit('likes.remove', talkId);
+      });
+    }
+  }, {
+    key: 'getCurrentUserFeedbackEntry',
+    value: function getCurrentUserFeedbackEntry(_ref3, callback) {
+      var id = _ref3.id;
+
+      _hellojs2['default'].api(this.c4pUrl + '/proposals/@{id}/feedback/@{entryId}', 'get', { id: id, entryId: this.currentUser.id + '-' + id }).then(callback, function (error) {
+        defaultErrorHandler(error, callback);
+      });
+    }
+  }]);
+
+  return KoliseoAPI;
+})();
+
+exports['default'] = new KoliseoAPI();
+module.exports = exports['default'];
+
+},{"hellojs":12}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _likesCollection = require('./likesCollection');
+
+var _likesCollection2 = _interopRequireDefault(_likesCollection);
+
+var _KoliseoAPI = require('./KoliseoAPI');
+
+var _KoliseoAPI2 = _interopRequireDefault(_KoliseoAPI);
+
+var getConfig = function getConfig(talkId) {
+  return !_KoliseoAPI2['default'].currentUser ? {
+    state: 'hidden',
+    text: ''
+  } : _likesCollection2['default'].isSelected(talkId) ? {
+    state: 'selected',
+    text: "I am planning to attend this talk"
+  } : {
+    state: 'default',
+    text: "Click to mark this talk as favorite"
+  };
+};
+
+var LikeButtonUtils = {
+
+  renderButton: function renderButton(talkId) {
+    var config = getConfig(talkId);
+    return '\n      <span class="ka-like-container">\n        <a class="ka-like icon-heart"\n            title="' + config.text + '"\n            data-talk="' + talkId + '"\n            data-state="' + config.state + '">\n        </a>\n      </span>\n    ';
+  },
+
+  onClickListener: function onClickListener(e) {
+    e.preventDefault();
+    var target = e.target;
+    // assert it is a like button
+    if (target.classList.contains('ka-like')) {
+      var talk = +target.dataset.talk;
+      if (!_likesCollection2['default'].isSelected(talk)) {
+        _KoliseoAPI2['default'].addLike(talk);
+      } else {
+        _KoliseoAPI2['default'].removeLike(talk);
+      }
+    }
+  },
+
+  update: function update(item) {
+    var talk = +item.dataset.talk;
+    var config = getConfig(talk);
+    item.dataset.state = config.state;
+    item.title = config.text;
+  },
+
+  addUpdateListener: function addUpdateListener(element) {
+    var _this = this;
+
+    _likesCollection2['default'].onUpdate(function (talk) {
+      var selector = !talk ? '.ka-like' : '.ka-like[data-talk="' + talk + '"]';
+      var items = element.querySelectorAll(selector);
+      if (items.forEach) {
+        items.forEach(_this.update);
+      } else {
+        Array.forEach(items, _this.update);
+      }
+    });
+  }
+
+};
+
+exports['default'] = LikeButtonUtils;
+module.exports = exports['default'];
+
+},{"./KoliseoAPI":4,"./likesCollection":8}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var _stringutils = require('./stringutils');
@@ -643,6 +982,10 @@ var _stringutils = require('./stringutils');
 var _util = require('./util');
 
 var _feedback = require('./feedback');
+
+var _LikeButtonUtils = require('./LikeButtonUtils');
+
+var _LikeButtonUtils2 = _interopRequireDefault(_LikeButtonUtils);
 
 var TalkDetailsPopup = (function () {
   function TalkDetailsPopup(_ref) {
@@ -661,11 +1004,19 @@ var TalkDetailsPopup = (function () {
     value: function render() {
 
       var talk = this.talk;
-      var links = !talk.videoUrl && !talk.slidesUrl ? '' : '<div class="ka-links ka-right">\n      ' + (!talk.slidesUrl ? '' : '<a href="' + talk.slidesUrl + '" target="_blank" class="icon-slideshare" title="Slides"><span class="sr-only">Slides in new window of "' + talk.title + '"</span></a>') + '\n      ' + (!talk.videoUrl ? '' : '<a href="' + talk.videoUrl + '" target="_blank" class="icon-youtube-play" title="Video"><span class="sr-only">Video in new window of "' + talk.title + '"</span></a>') + '\n    </div>';
-      var html = '\n      <div class="ka-talk-details-window">\n        <a class="ka-close" title="close"></a>\n        <div class="ka-talk-details-viewport">\n          <div class="ka-talk-details-inner">\n            <div class="ka-talk-details-contents">\n              <h2 class="ka-talk-details-title">' + links + ' ' + talk.title + ' ' + this.feedback.renderFeedback() + '</h2>\n              <div class="ka-talk-details-description">' + (0, _stringutils.formatMarkdown)(talk.description) + '</div>\n              ' + this.renderTags(talk.tags) + '\n              <div class="ka-feedback-entries"></div>\n            </div>\n            <ul class="ka-avatars">\n              ' + talk.authors.map(this.renderAuthor).join('') + '\n            </ul>\n          </div>\n        </div>\n      </div>\n    ';
+      var links = [];
+      links.push(_LikeButtonUtils2['default'].renderButton(talk.id));
+      talk.slidesUrl && links.push('<a href="' + talk.slidesUrl + '" target="_blank" class="icon-slideshare" title="Slides"><span class="sr-only">Slides in new window of "' + talk.title + '"</span></a>');
+      talk.videoUrl && links.push('<a href="' + talk.videoUrl + '" target="_blank" class="icon-youtube-play" title="Video"><span class="sr-only">Video in new window of "' + talk.title + '"</span></a>');
+      var linkContainer = !links.length ? '' : '<div class="ka-links ka-right">\n      ' + links.join('') + '\n    </div>';
+      var html = '\n      <div class="ka-talk-details-window">\n        <a class="ka-close" title="close"></a>\n        <div class="ka-talk-details-viewport">\n          <div class="ka-talk-details-inner">\n            <div class="ka-talk-details-contents">\n              <h2 class="ka-talk-details-title">' + linkContainer + ' ' + talk.title + ' ' + this.feedback.renderFeedback() + '</h2>\n              <div class="ka-talk-details-description">' + (0, _stringutils.formatMarkdown)(talk.description) + '</div>\n              ' + this.renderTags(talk.tags) + '\n              <div class="ka-feedback-entries"></div>\n            </div>\n            <ul class="ka-avatars">\n              ' + talk.authors.map(this.renderAuthor).join('') + '\n            </ul>\n          </div>\n        </div>\n      </div>\n    ';
       document.body.insertAdjacentHTML('beforeend', html);
       document.querySelector('.ka-overlay').classList.remove('ka-hidden');
       this.feedback.renderFeedbackEntries(document.querySelector('.ka-feedback-entries'));
+
+      var detailsContent = document.querySelector('.ka-talk-details-contents');
+      _LikeButtonUtils2['default'].addUpdateListener(detailsContent);
+      detailsContent.querySelector('.ka-like').onclick = _LikeButtonUtils2['default'].onClickListener;
     }
   }, {
     key: 'renderTags',
@@ -690,9 +1041,11 @@ var TalkDetailsPopup = (function () {
       var name = _ref2.name;
       var avatar = _ref2.avatar;
       var description = _ref2.description;
+      var twitterAccount = _ref2.twitterAccount;
 
       avatar = avatar.indexOf('//') == 0 ? 'https:' + avatar : avatar;
-      return '\n      <li class="ka-avatar-li ka-avatar-and-text">\n        <a href="https://www.koliseo.com/' + uuid + '" class="ka-avatar-container">\n          <span style="display:table-row">\n            <img class="ka-avatar-img" src="' + avatar + '">\n            <span class="ka-author-name">' + name + '</a>\n          </span>\n        </a>\n        <div class="ka-author-data">\n          <div class="ka-author-description">' + (0, _stringutils.formatMarkdown)(description) + '</div>\n        </div>\n      </li>\n    ';
+      var $name = '<a href="https://www.koliseo.com/' + uuid + '" class="ka-author-name">' + name + '</a>';
+      return '\n      <li class="ka-avatar-li ka-avatar-and-text">\n        <span class="ka-avatar-container">\n          <span style="display:table-row">\n            <a href="https://www.koliseo.com/' + uuid + '" class="ka-avatar-img"><img src="' + avatar + '" class="ka-avatar-img"></a>\n            ' + (!twitterAccount ? $name : '\n              <span class="ka-author-name-container">\n                ' + $name + '\n                <a href="https://twitter.com/' + twitterAccount + '" class="ka-author-twitter" target="_blank">@' + twitterAccount + '</a>\n              </span>') + '\n          </span>\n        </span>\n        <div class="ka-author-data">\n          <div class="ka-author-description">' + (0, _stringutils.formatMarkdown)(description) + '</div>\n        </div>\n      </li>\n    ';
     }
   }]);
 
@@ -703,7 +1056,7 @@ var TalkDetailsPopup = (function () {
 
 exports.TalkDetailsPopup = TalkDetailsPopup;
 
-},{"./feedback":5,"./stringutils":8,"./util":9}],5:[function(require,module,exports){
+},{"./LikeButtonUtils":5,"./feedback":7,"./stringutils":10,"./util":11}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -720,6 +1073,12 @@ var _util = require('./util');
 
 var _util2 = _interopRequireDefault(_util);
 
+var _KoliseoAPI = require('./KoliseoAPI');
+
+var _KoliseoAPI2 = _interopRequireDefault(_KoliseoAPI);
+
+var MIN_STARS_WIHOUT_COMMENT = 3;
+
 var getStarBarTemplate = function getStarBarTemplate(width, isEditing) {
   return '\n    <div class="ka-star-rating">\n      <span class="ka-star-bar" style="width: ' + width + '%"></span>\n      ' + (!isEditing ? '' : [1, 2, 3, 4, 5].map(function (star) {
     return '<a data-rating="' + star + '" title="' + star + ' ' + (star > 1 ? 'stars' : 'star') + '" class="ka-star ka-star-' + star + '"></a>';
@@ -727,7 +1086,11 @@ var getStarBarTemplate = function getStarBarTemplate(width, isEditing) {
 };
 
 var getAnonymousUserFeedbackTemplate = function getAnonymousUserFeedbackTemplate() {
-  return '\n    <li class="ka-avatar-li ka-editing">\n      <div class="ka-entry-details">\n        <span class="ka-avatar-container">\n          <img class="ka-avatar-img" src="https://www.koliseo.com/less/img/avatar.gif">\n        </span>\n        <div class="ka-feedback-entry">\n          <a class="ka-button ka-right" onclick="Koliseo.auth.login()">Sign in</a>\n          <div class="ka-author-name">\n            <span class="ka-author">You must sign in to provide feedback</span>\n          </div>\n          <div class="ka-star-cell">' + getStarBarTemplate(0) + '</div>\n        </div>\n      </div>\n    </li>\n  ';
+  return '\n    <li class="ka-avatar-li ka-editing">\n      <div class="ka-entry-details">\n        <span class="ka-avatar-container">\n          <img class="ka-avatar-img" src="https://www.koliseo.com/less/img/avatar.gif">\n        </span>\n        <div class="ka-feedback-entry">\n          <a class="ka-button ka-right">Sign in</a>\n          <div class="ka-author-name">\n            <span class="ka-author">You must sign in to provide feedback</span>\n          </div>\n          <div class="ka-star-cell">' + getStarBarTemplate(0) + '</div>\n        </div>\n      </div>\n    </li>\n  ';
+};
+
+var canSendFeedback = function canSendFeedback(rating, comment) {
+  return rating >= MIN_STARS_WIHOUT_COMMENT || rating >= 1 && !!comment.trim();
 };
 
 var getUserFeedbackTemplate = function getUserFeedbackTemplate(_ref, isEditing) {
@@ -739,13 +1102,28 @@ var getUserFeedbackTemplate = function getUserFeedbackTemplate(_ref, isEditing) 
   var user = _ref.user;
 
   var width = rating * 100 / 5;
-  var $comment = isEditing ? '\n    <p>\n      <textarea name="comment" class="ka-comment" placeholder="Share your thoughts" maxlength="255">' + comment + '</textarea>\n      <br>\n      <button class="ka-button" ' + (!rating ? 'disabled' : '') + '>Send</button>\n      <span class="ka-messages ka-hide"></span>\n    </p>\n  ' : comment ? '<p>' + comment + '</p>' : '';
+  // comment is required with 2 stars or less
+  var $comment = isEditing ? '\n    <p>\n      <textarea name="comment" class="ka-comment" placeholder="Share your thoughts" maxlength="255">' + comment + '</textarea>\n      <br>\n      <button class="ka-button" ' + (!canSendFeedback(rating, comment) ? 'disabled' : '') + '>Send</button>\n      <span class="ka-messages ka-hide"></span>\n    </p>\n  ' : comment ? '<p>' + comment + '</p>' : '';
   var timestamp = '';
   if (lastModified) {
     var date = new Date(lastModified);
     timestamp = '<span class="ka-feedback-time">' + date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + '</span>';
   }
   return '\n    <li class="ka-avatar-li ' + (isEditing ? 'ka-editing' : '') + '">\n      <div class="ka-entry-details">\n        <a href="https://www.koliseo.com/' + user.uuid + '" class="ka-avatar-container">\n          <img class="ka-avatar-img" src="' + user.avatar + '">\n        </a>\n        <div class="ka-feedback-entry">\n          <div class="ka-author-name">\n            <span class="ka-author">' + user.name + '</span>\n            ' + timestamp + '\n          </div>\n          <div class="ka-star-cell">' + getStarBarTemplate(width, isEditing) + '</div>\n          ' + $comment + '\n        </div>\n      </div>\n    </li>\n  ';
+};
+
+var showMessage = function showMessage(_ref2) {
+  var element = _ref2.element;
+  var message = _ref2.message;
+  var level = _ref2.level;
+  var _ref2$hide = _ref2.hide;
+  var hide = _ref2$hide === undefined ? true : _ref2$hide;
+
+  element.innerHTML = '<span class="ka-message ' + level + '">' + message + '</span>';
+  _util2['default'].transitionFrom(element, 'ka-hide');
+  hide && setTimeout(function () {
+    _util2['default'].transitionTo(element, 'ka-hide');
+  }, 3000);
 };
 
 var TalkFeedback = (function () {
@@ -756,6 +1134,11 @@ var TalkFeedback = (function () {
   }
 
   _createClass(TalkFeedback, [{
+    key: 'isFeedbackEnabled',
+    value: function isFeedbackEnabled() {
+      return Koliseo.agenda.model.feedbackEnabled;
+    }
+  }, {
     key: 'renderFeedback',
     value: function renderFeedback() {
       var width = this.talk.feedback && this.talk.feedback.ratingAverage * 100 / 5 || 0;
@@ -770,52 +1153,94 @@ var TalkFeedback = (function () {
         element.innerHTML = '';
         element.insertAdjacentHTML('beforeend', '<ul class="ka-entries"></ul>');
         var $feedbackEntries = element.querySelector('.ka-entries');
-        if (Koliseo.auth.currentUser) {
-          (function () {
-            var render = function render(entry) {
-              entry.user = entry.user || Koliseo.auth.currentUser;
-              entry.rating = entry.rating || 0;
-              var html = getUserFeedbackTemplate(entry, true);
-              var $li = undefined;
-              if ($feedbackEntries.children.length) {
-                $li = $feedbackEntries.querySelector('.ka-avatar-li.ka-editing');
-                $li && $feedbackEntries.removeChild($li);
-              }
-              $feedbackEntries.insertAdjacentHTML('afterbegin', html);
-              Array.prototype.forEach.call($feedbackEntries.querySelectorAll('.ka-star'), function (item) {
-                item.onclick = (function (e) {
-                  var rating = e.target.dataset.rating;
-                  render({ rating: rating, comment: $feedbackEntries.querySelector('.ka-comment').value, user: entry.user });
-                }).bind(_this);
-                item.onmouseover = function (e) {
-                  var rating = e.target.dataset.rating;
-                  $feedbackEntries.querySelector('.ka-star-bar').style.width = rating * 100 / 5 + '%';
+        if (_this.isFeedbackEnabled()) {
+          if (_KoliseoAPI2['default'].currentUser) {
+            (function () {
+              var render = function render(entry) {
+                entry.user = entry.user || _KoliseoAPI2['default'].currentUser;
+                entry.rating = entry.rating || 0;
+                var html = getUserFeedbackTemplate(entry, true);
+                var $li = undefined;
+                if ($feedbackEntries.children.length) {
+                  $li = $feedbackEntries.querySelector('.ka-avatar-li.ka-editing');
+                  $li && $feedbackEntries.removeChild($li);
+                }
+                $feedbackEntries.insertAdjacentHTML('afterbegin', html);
+                var $comment = $feedbackEntries.querySelector('.ka-comment');
+                var $sendButton = $feedbackEntries.querySelector('.ka-button');
+                var $messages = $feedbackEntries.querySelector('.ka-messages');
+                var showCommentMessage = function showCommentMessage(_ref3) {
+                  var _ref3$comment = _ref3.comment;
+                  var comment = _ref3$comment === undefined ? '' : _ref3$comment;
+                  var rating = _ref3.rating;
+
+                  $messages.innerHTML && ($messages.innerHTML = '');
+                  if (!comment.trim() && rating > 0 && rating < 5) {
+                    if (rating >= MIN_STARS_WIHOUT_COMMENT) {
+                      showMessage({
+                        message: 'The author would appreciate your comment',
+                        element: $messages,
+                        level: 'warn',
+                        hide: false
+                      });
+                    } else {
+                      showMessage({
+                        message: 'Comment is required for 2 stars or less',
+                        element: $messages,
+                        level: 'alert',
+                        hide: false
+                      });
+                    }
+                  }
                 };
-                item.onmouseleave = function (e) {
-                  $feedbackEntries.querySelector('.ka-star-bar').style.width = entry.rating * 100 / 5 + '%';
-                };
-              });
-              $feedbackEntries.querySelector('.ka-button').onclick = (function () {
-                var comment = $feedbackEntries.querySelector('.ka-comment').value;
-                Koliseo.auth.sendFeedback({ id: _this.talk.id, rating: entry.rating, comment: comment }, function (resp) {
-                  var messages = $feedbackEntries.querySelector('.ka-messages');
-                  messages.innerHTML = 'Thanks for your feedback!';
-                  _util2['default'].transitionFrom(messages, 'ka-hide');
-                  setTimeout(function () {
-                    _util2['default'].transitionTo(messages, 'ka-hide');
-                  }, 3000);
+                showCommentMessage(entry);
+                Array.prototype.forEach.call($feedbackEntries.querySelectorAll('.ka-star'), function (item) {
+                  item.onclick = (function (e) {
+                    var rating = e.target.dataset.rating;
+                    var comment = $comment.value;
+                    render({ rating: rating, comment: comment, user: entry.user });
+                    showCommentMessage({ rating: rating, comment: comment });
+                  }).bind(_this);
+                  item.onmouseover = function (e) {
+                    var rating = e.target.dataset.rating;
+                    $feedbackEntries.querySelector('.ka-star-bar').style.width = rating * 100 / 5 + '%';
+                  };
+                  item.onmouseleave = function (e) {
+                    $feedbackEntries.querySelector('.ka-star-bar').style.width = entry.rating * 100 / 5 + '%';
+                  };
                 });
-              }).bind(_this);
-            };
-            Koliseo.auth.getCurrentUserFeedbackEntry(_this.talk, render);
-          })();
-        } else {
-          $feedbackEntries.insertAdjacentHTML('beforeend', getAnonymousUserFeedbackTemplate());
+                $comment.onkeyup = (function (e) {
+                  if (canSendFeedback(entry.rating, $comment.value)) {
+                    $sendButton.removeAttribute('disabled');
+                  } else {
+                    $sendButton.disabled = true;
+                  }
+                  showCommentMessage({
+                    comment: $comment.value,
+                    rating: entry.rating
+                  });
+                }).bind(_this);
+                $sendButton.onclick = (function () {
+                  var comment = $comment.value;
+                  _KoliseoAPI2['default'].sendFeedback({ id: _this.talk.id, rating: entry.rating, comment: comment }, function (resp) {
+                    showMessage({
+                      message: 'Thanks for your feedback!',
+                      element: $messages
+                    });
+                  });
+                }).bind(_this);
+              };
+              _KoliseoAPI2['default'].getCurrentUserFeedbackEntry(_this.talk, render);
+            })();
+          } else if (_KoliseoAPI2['default'].isOAuthConfigured()) {
+            $feedbackEntries.insertAdjacentHTML('beforeend', getAnonymousUserFeedbackTemplate());
+            $feedbackEntries.querySelector('.ka-button').onclick = _KoliseoAPI2['default'].login;
+          }
         }
 
-        Koliseo.auth.getFeedbackEntries(_this.talk.id, undefined, function (entries) {
+        _KoliseoAPI2['default'].getFeedbackEntries(_this.talk.id, undefined, function (entries) {
           entries.forEach(function (entry) {
-            if (!Koliseo.auth.currentUser || entry.user.id !== Koliseo.auth.currentUser.id) {
+            if (!_KoliseoAPI2['default'].currentUser || entry.user.id !== _KoliseoAPI2['default'].currentUser.id) {
               var html = getUserFeedbackTemplate(entry);
               html && $feedbackEntries.insertAdjacentHTML('beforeend', html);
             }
@@ -823,10 +1248,10 @@ var TalkFeedback = (function () {
         });
       }).bind(this);
       renderFeedbackEntries(element);
-      Koliseo.auth.on('koliseo.login', (function () {
+      _KoliseoAPI2['default'].on('login', (function () {
         renderFeedbackEntries(element);
       }).bind(this));
-      Koliseo.auth.on('koliseo.logout', (function () {
+      _KoliseoAPI2['default'].on('logout', (function () {
         renderFeedbackEntries(element);
       }).bind(this));
     }
@@ -842,7 +1267,76 @@ exports['default'] = {
 };
 module.exports = exports['default'];
 
-},{"./util":9}],6:[function(require,module,exports){
+},{"./KoliseoAPI":4,"./util":11}],8:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+var _KoliseoAPI = require('./KoliseoAPI');
+
+var _KoliseoAPI2 = _interopRequireDefault(_KoliseoAPI);
+
+var LikesCollection = (function () {
+  function LikesCollection() {
+    var _this = this;
+
+    _classCallCheck(this, LikesCollection);
+
+    // id of the talks to mark as selected
+    this.likes = [];
+
+    _KoliseoAPI2['default'].on('login', function () {
+      _KoliseoAPI2['default'].getCurrentUserLikes().then(function (likes) {
+        _this.likes = likes;
+        _KoliseoAPI2['default'].emit('likes.update');
+      });
+    });
+    _KoliseoAPI2['default'].on('logout', function () {
+      _this.likes = [];
+      _KoliseoAPI2['default'].emit('likes.update');
+    });
+    _KoliseoAPI2['default'].on('likes.add', function (talkId) {
+      if (!_this.isSelected(talkId)) {
+        _this.likes.push(talkId);
+        _KoliseoAPI2['default'].emit('likes.update', talkId);
+      }
+    });
+    _KoliseoAPI2['default'].on('likes.remove', function (talkId) {
+      var index = _this.likes.indexOf(talkId);
+      if (index !== -1) {
+        _this.likes.splice(index, 1);
+        _KoliseoAPI2['default'].emit('likes.update', talkId);
+      }
+    });
+  }
+
+  _createClass(LikesCollection, [{
+    key: 'isSelected',
+    value: function isSelected(talkId) {
+      return this.likes.indexOf(talkId) !== -1;
+    }
+  }, {
+    key: 'onUpdate',
+    value: function onUpdate(callback) {
+      _KoliseoAPI2['default'].on('likes.update', callback);
+    }
+  }]);
+
+  return LikesCollection;
+})();
+
+exports['default'] = new LikesCollection();
+module.exports = exports['default'];
+
+},{"./KoliseoAPI":4}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -855,7 +1349,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 var _AgendaView = require('./AgendaView');
 
-var _security = require('./security');
+var _KoliseoAPI = require('./KoliseoAPI');
+
+var _KoliseoAPI2 = _interopRequireDefault(_KoliseoAPI);
 
 var _hellojs = require('hellojs');
 
@@ -869,7 +1365,7 @@ Koliseo.agenda = {};
   Renders an agenda.
 
 */
-Koliseo.agenda.render = function (_ref) // {String} The Koliseo OAuth client ID
+Koliseo.agenda.render = function (_ref) // {String} optional. The Koliseo OAuth client ID
 // {String} optional. URL to make the security requests
 {
   var c4pUrl = _ref.c4pUrl;
@@ -893,9 +1389,7 @@ Koliseo.agenda.render = function (_ref) // {String} The Koliseo OAuth client ID
     }
   };
 
-  _hellojs2['default'].init({ koliseo: oauthClientId });
-
-  Koliseo.auth = new _security.Security({ c4pUrl: c4pUrl, baseUrl: baseUrl });
+  _KoliseoAPI2['default'].init({ c4pUrl: c4pUrl, baseUrl: baseUrl, oauthClientId: oauthClientId });
 
   agendaUrl = agendaUrl || c4pUrl + '/agenda';
 
@@ -912,6 +1406,7 @@ Koliseo.agenda.render = function (_ref) // {String} The Koliseo OAuth client ID
     var c4p = _ref32[0];
     var agenda = _ref32[1];
 
+    Koliseo.agenda.model = agenda;
     new _AgendaView.AgendaView({
       c4p: c4p,
       agenda: agenda,
@@ -924,202 +1419,7 @@ Koliseo.agenda.render = function (_ref) // {String} The Koliseo OAuth client ID
 exports['default'] = Koliseo.agenda;
 module.exports = exports['default'];
 
-},{"./AgendaView":3,"./security":7,"hellojs":10}],7:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-var _hellojs = require('hellojs');
-
-var _hellojs2 = _interopRequireDefault(_hellojs);
-
-var HOSTNAME = location.hostname == 'localhost' ? 'http://localhost:8888/' : 'https://www.koliseo.com/';
-
-var getSecurityInstance = function getSecurityInstance(_ref) {
-  var _ref$baseUrl = _ref.baseUrl;
-  var baseUrl = _ref$baseUrl === undefined ? HOSTNAME : _ref$baseUrl;
-  var c4pUrl = _ref.c4pUrl;
-
-  if (this.instance) {
-    return this.instance;
-  }
-
-  _hellojs2['default'].init({
-
-    koliseo: {
-
-      name: 'Koliseo',
-
-      oauth: {
-        version: 2,
-        auth: baseUrl + 'login/auth',
-        grant: baseUrl + 'login/auth/token',
-        redirect_uri: window.location.href.split('#')[0]
-      },
-
-      scope: {
-        basic: 'talks.feedback'
-      },
-
-      // API base URI
-      base: baseUrl,
-
-      // Map GET requests
-      get: {
-        me: 'users/current'
-      },
-
-      // Map POST requests
-      post: {},
-
-      // Map PUT requests
-      put: {},
-
-      // Map DELETE requests
-      del: {},
-
-      xhr: function xhr(p) {
-        var token = p.query.access_token;
-        delete p.query.access_token;
-        p.headers = p.headers || {};
-        if (token) {
-          p.headers["Authorization"] = "Bearer " + token;
-        }
-        p.headers['Content-Type'] = 'application/json';
-        p.headers['Accept'] = 'application/json';
-        if (p.method === 'post' || p.method === 'put') {
-          p.data = JSON.stringify(p.data);
-        }
-        return true;
-      }
-
-    }
-  }, {
-    display: 'page',
-    default_service: 'koliseo',
-    force: false
-  });
-
-  var defaultErrorHandler = function defaultErrorHandler(e, successCallback) {
-    if (e && e.error) {
-      // check some UC that hellojs see as errors and we do not
-      if ("empty_response" === e.error.code) {
-        successCallback && successCallback(undefined);
-      }
-      // usually this is because of an invalid token or an expired token
-      if ("access_denied" === e.error.code) {
-        _hellojs2['default'].logout();
-        return false;
-      }
-    }
-    return e;
-  };
-
-  var currentUser = undefined;
-
-  var Security = (function () {
-    function Security(c4pUrl) {
-      _classCallCheck(this, Security);
-
-      this.c4pUrl = c4pUrl;
-
-      _hellojs2['default'].on('auth.login', function (auth) {
-        (0, _hellojs2['default'])(auth.network).api('me').then(function (user) {
-          currentUser = user;
-          _hellojs2['default'].emit('koliseo.login');
-        }, defaultErrorHandler);
-      });
-
-      _hellojs2['default'].on('auth.logout', function (r) {
-        currentUser = undefined;
-        _hellojs2['default'].emit('koliseo.logout');
-      });
-    }
-
-    _createClass(Security, [{
-      key: 'on',
-      value: function on(eventName, callback) {
-        _hellojs2['default'].on(eventName, callback);
-      }
-    }, {
-      key: 'off',
-      value: function off(eventName, callback) {
-        _hellojs2['default'].off(eventName, callback);
-      }
-    }, {
-      key: 'login',
-      value: function login(e) {
-        e && e.preventDefault();
-        _hellojs2['default'].login();
-      }
-    }, {
-      key: 'logout',
-      value: function logout(e) {
-        e && e.preventDefault();
-        _hellojs2['default'].logout();
-      }
-    }, {
-      key: 'sendFeedback',
-      value: function sendFeedback(_ref2, callback) {
-        var id = _ref2.id;
-        var rating = _ref2.rating;
-        var comment = _ref2.comment;
-
-        _hellojs2['default'].api(this.c4pUrl + '/proposals/@{id}/feedback', 'post', { id: id, rating: rating, comment: comment }).then(callback, function (error) {
-          defaultErrorHandler(error, callback);
-        });
-      }
-    }, {
-      key: 'getFeedbackEntries',
-      value: function getFeedbackEntries(id, cursor, callback) {
-        var _this = this;
-
-        var successCallback = (function (resp) {
-          callback(resp.data);
-          if (resp.cursor) {
-            _this.getFeedbackEntries(id, resp.cursor, callback);
-          }
-        }).bind(this);
-        _hellojs2['default'].api(this.c4pUrl + '/proposals/' + id + '/feedback?' + (cursor ? 'cursor=' + cursor : '')).then(successCallback, function (error) {
-          defaultErrorHandler(error, callback);
-        });
-      }
-    }, {
-      key: 'getCurrentUserFeedbackEntry',
-      value: function getCurrentUserFeedbackEntry(_ref3, callback) {
-        var id = _ref3.id;
-
-        _hellojs2['default'].api(this.c4pUrl + '/proposals/@{id}/feedback/@{entryId}', 'get', { id: id, entryId: currentUser.id + '-' + id }).then(callback, function (error) {
-          defaultErrorHandler(error, callback);
-        });
-      }
-    }, {
-      key: 'currentUser',
-      get: function get() {
-        return currentUser;
-      }
-    }]);
-
-    return Security;
-  })();
-
-  this.instance = new Security(c4pUrl);
-
-  return this.instance;
-};
-
-exports['default'] = { Security: getSecurityInstance };
-module.exports = exports['default'];
-
-},{"hellojs":10}],8:[function(require,module,exports){
+},{"./AgendaView":3,"./KoliseoAPI":4,"hellojs":12}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -1138,7 +1438,7 @@ var formatMarkdown = function formatMarkdown(s) {
 
 exports.formatMarkdown = formatMarkdown;
 
-},{"marked":60}],9:[function(require,module,exports){
+},{"marked":62}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1244,7 +1544,7 @@ exports["default"] = {
 };
 module.exports = exports["default"];
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (process){
 /*! hellojs v1.9.6 | (c) 2012-2015 Andrew Dodson | MIT https://adodson.com/hello.js/LICENSE */
 // ES5 Object.create
@@ -7003,7 +7303,7 @@ if (typeof module === 'object' && module.exports) {
 
 }).call(this,require('_process'))
 
-},{"_process":61}],11:[function(require,module,exports){
+},{"_process":63}],13:[function(require,module,exports){
 /**
  * Gets the last element of `array`.
  *
@@ -7024,7 +7324,7 @@ function last(array) {
 
 module.exports = last;
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var baseEach = require('../internal/baseEach'),
     createFind = require('../internal/createFind');
 
@@ -7082,7 +7382,7 @@ var find = createFind(baseEach);
 
 module.exports = find;
 
-},{"../internal/baseEach":15,"../internal/createFind":33}],13:[function(require,module,exports){
+},{"../internal/baseEach":17,"../internal/createFind":35}],15:[function(require,module,exports){
 /**
  * A specialized version of `_.some` for arrays without support for callback
  * shorthands and `this` binding.
@@ -7107,7 +7407,7 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var baseMatches = require('./baseMatches'),
     baseMatchesProperty = require('./baseMatchesProperty'),
     bindCallback = require('./bindCallback'),
@@ -7144,7 +7444,7 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"../utility/identity":58,"../utility/property":59,"./baseMatches":24,"./baseMatchesProperty":25,"./bindCallback":30}],15:[function(require,module,exports){
+},{"../utility/identity":60,"../utility/property":61,"./baseMatches":26,"./baseMatchesProperty":27,"./bindCallback":32}],17:[function(require,module,exports){
 var baseForOwn = require('./baseForOwn'),
     createBaseEach = require('./createBaseEach');
 
@@ -7161,7 +7461,7 @@ var baseEach = createBaseEach(baseForOwn);
 
 module.exports = baseEach;
 
-},{"./baseForOwn":19,"./createBaseEach":31}],16:[function(require,module,exports){
+},{"./baseForOwn":21,"./createBaseEach":33}],18:[function(require,module,exports){
 /**
  * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
  * without support for callback shorthands and `this` binding, which iterates
@@ -7188,7 +7488,7 @@ function baseFind(collection, predicate, eachFunc, retKey) {
 
 module.exports = baseFind;
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /**
  * The base implementation of `_.findIndex` and `_.findLastIndex` without
  * support for callback shorthands and `this` binding.
@@ -7213,7 +7513,7 @@ function baseFindIndex(array, predicate, fromRight) {
 
 module.exports = baseFindIndex;
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 var createBaseFor = require('./createBaseFor');
 
 /**
@@ -7232,7 +7532,7 @@ var baseFor = createBaseFor();
 
 module.exports = baseFor;
 
-},{"./createBaseFor":32}],19:[function(require,module,exports){
+},{"./createBaseFor":34}],21:[function(require,module,exports){
 var baseFor = require('./baseFor'),
     keys = require('../object/keys');
 
@@ -7251,7 +7551,7 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"../object/keys":55,"./baseFor":18}],20:[function(require,module,exports){
+},{"../object/keys":57,"./baseFor":20}],22:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -7282,7 +7582,7 @@ function baseGet(object, path, pathKey) {
 
 module.exports = baseGet;
 
-},{"./toObject":47}],21:[function(require,module,exports){
+},{"./toObject":49}],23:[function(require,module,exports){
 var baseIsEqualDeep = require('./baseIsEqualDeep'),
     isObject = require('../lang/isObject'),
     isObjectLike = require('./isObjectLike');
@@ -7312,7 +7612,7 @@ function baseIsEqual(value, other, customizer, isLoose, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"../lang/isObject":53,"./baseIsEqualDeep":22,"./isObjectLike":44}],22:[function(require,module,exports){
+},{"../lang/isObject":55,"./baseIsEqualDeep":24,"./isObjectLike":46}],24:[function(require,module,exports){
 var equalArrays = require('./equalArrays'),
     equalByTag = require('./equalByTag'),
     equalObjects = require('./equalObjects'),
@@ -7416,7 +7716,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isLoose, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"../lang/isArray":50,"../lang/isTypedArray":54,"./equalArrays":34,"./equalByTag":35,"./equalObjects":36}],23:[function(require,module,exports){
+},{"../lang/isArray":52,"../lang/isTypedArray":56,"./equalArrays":36,"./equalByTag":37,"./equalObjects":38}],25:[function(require,module,exports){
 var baseIsEqual = require('./baseIsEqual'),
     toObject = require('./toObject');
 
@@ -7470,7 +7770,7 @@ function baseIsMatch(object, matchData, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"./baseIsEqual":21,"./toObject":47}],24:[function(require,module,exports){
+},{"./baseIsEqual":23,"./toObject":49}],26:[function(require,module,exports){
 var baseIsMatch = require('./baseIsMatch'),
     getMatchData = require('./getMatchData'),
     toObject = require('./toObject');
@@ -7502,7 +7802,7 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"./baseIsMatch":23,"./getMatchData":38,"./toObject":47}],25:[function(require,module,exports){
+},{"./baseIsMatch":25,"./getMatchData":40,"./toObject":49}],27:[function(require,module,exports){
 var baseGet = require('./baseGet'),
     baseIsEqual = require('./baseIsEqual'),
     baseSlice = require('./baseSlice'),
@@ -7549,7 +7849,7 @@ function baseMatchesProperty(path, srcValue) {
 
 module.exports = baseMatchesProperty;
 
-},{"../array/last":11,"../lang/isArray":50,"./baseGet":20,"./baseIsEqual":21,"./baseSlice":28,"./isKey":42,"./isStrictComparable":45,"./toObject":47,"./toPath":48}],26:[function(require,module,exports){
+},{"../array/last":13,"../lang/isArray":52,"./baseGet":22,"./baseIsEqual":23,"./baseSlice":30,"./isKey":44,"./isStrictComparable":47,"./toObject":49,"./toPath":50}],28:[function(require,module,exports){
 /**
  * The base implementation of `_.property` without support for deep paths.
  *
@@ -7565,7 +7865,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],27:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 var baseGet = require('./baseGet'),
     toPath = require('./toPath');
 
@@ -7586,7 +7886,7 @@ function basePropertyDeep(path) {
 
 module.exports = basePropertyDeep;
 
-},{"./baseGet":20,"./toPath":48}],28:[function(require,module,exports){
+},{"./baseGet":22,"./toPath":50}],30:[function(require,module,exports){
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -7620,7 +7920,7 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],29:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 /**
  * Converts `value` to a string if it's not one. An empty string is returned
  * for `null` or `undefined` values.
@@ -7635,7 +7935,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],30:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 var identity = require('../utility/identity');
 
 /**
@@ -7676,7 +7976,7 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"../utility/identity":58}],31:[function(require,module,exports){
+},{"../utility/identity":60}],33:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength'),
     toObject = require('./toObject');
@@ -7709,7 +8009,7 @@ function createBaseEach(eachFunc, fromRight) {
 
 module.exports = createBaseEach;
 
-},{"./getLength":37,"./isLength":43,"./toObject":47}],32:[function(require,module,exports){
+},{"./getLength":39,"./isLength":45,"./toObject":49}],34:[function(require,module,exports){
 var toObject = require('./toObject');
 
 /**
@@ -7738,7 +8038,7 @@ function createBaseFor(fromRight) {
 
 module.exports = createBaseFor;
 
-},{"./toObject":47}],33:[function(require,module,exports){
+},{"./toObject":49}],35:[function(require,module,exports){
 var baseCallback = require('./baseCallback'),
     baseFind = require('./baseFind'),
     baseFindIndex = require('./baseFindIndex'),
@@ -7765,7 +8065,7 @@ function createFind(eachFunc, fromRight) {
 
 module.exports = createFind;
 
-},{"../lang/isArray":50,"./baseCallback":14,"./baseFind":16,"./baseFindIndex":17}],34:[function(require,module,exports){
+},{"../lang/isArray":52,"./baseCallback":16,"./baseFind":18,"./baseFindIndex":19}],36:[function(require,module,exports){
 var arraySome = require('./arraySome');
 
 /**
@@ -7818,7 +8118,7 @@ function equalArrays(array, other, equalFunc, customizer, isLoose, stackA, stack
 
 module.exports = equalArrays;
 
-},{"./arraySome":13}],35:[function(require,module,exports){
+},{"./arraySome":15}],37:[function(require,module,exports){
 /** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -7868,7 +8168,7 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],36:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 var keys = require('../object/keys');
 
 /** Used for native method references. */
@@ -7937,7 +8237,7 @@ function equalObjects(object, other, equalFunc, customizer, isLoose, stackA, sta
 
 module.exports = equalObjects;
 
-},{"../object/keys":55}],37:[function(require,module,exports){
+},{"../object/keys":57}],39:[function(require,module,exports){
 var baseProperty = require('./baseProperty');
 
 /**
@@ -7954,7 +8254,7 @@ var getLength = baseProperty('length');
 
 module.exports = getLength;
 
-},{"./baseProperty":26}],38:[function(require,module,exports){
+},{"./baseProperty":28}],40:[function(require,module,exports){
 var isStrictComparable = require('./isStrictComparable'),
     pairs = require('../object/pairs');
 
@@ -7977,7 +8277,7 @@ function getMatchData(object) {
 
 module.exports = getMatchData;
 
-},{"../object/pairs":57,"./isStrictComparable":45}],39:[function(require,module,exports){
+},{"../object/pairs":59,"./isStrictComparable":47}],41:[function(require,module,exports){
 var isNative = require('../lang/isNative');
 
 /**
@@ -7995,7 +8295,7 @@ function getNative(object, key) {
 
 module.exports = getNative;
 
-},{"../lang/isNative":52}],40:[function(require,module,exports){
+},{"../lang/isNative":54}],42:[function(require,module,exports){
 var getLength = require('./getLength'),
     isLength = require('./isLength');
 
@@ -8012,7 +8312,7 @@ function isArrayLike(value) {
 
 module.exports = isArrayLike;
 
-},{"./getLength":37,"./isLength":43}],41:[function(require,module,exports){
+},{"./getLength":39,"./isLength":45}],43:[function(require,module,exports){
 /** Used to detect unsigned integer values. */
 var reIsUint = /^\d+$/;
 
@@ -8038,7 +8338,7 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],42:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 var isArray = require('../lang/isArray'),
     toObject = require('./toObject');
 
@@ -8068,7 +8368,7 @@ function isKey(value, object) {
 
 module.exports = isKey;
 
-},{"../lang/isArray":50,"./toObject":47}],43:[function(require,module,exports){
+},{"../lang/isArray":52,"./toObject":49}],45:[function(require,module,exports){
 /**
  * Used as the [maximum length](http://ecma-international.org/ecma-262/6.0/#sec-number.max_safe_integer)
  * of an array-like value.
@@ -8090,7 +8390,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],44:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -8104,7 +8404,7 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],45:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -8121,7 +8421,7 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"../lang/isObject":53}],46:[function(require,module,exports){
+},{"../lang/isObject":55}],48:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('./isIndex'),
@@ -8164,7 +8464,7 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"../lang/isArguments":49,"../lang/isArray":50,"../object/keysIn":56,"./isIndex":41,"./isLength":43}],47:[function(require,module,exports){
+},{"../lang/isArguments":51,"../lang/isArray":52,"../object/keysIn":58,"./isIndex":43,"./isLength":45}],49:[function(require,module,exports){
 var isObject = require('../lang/isObject');
 
 /**
@@ -8180,7 +8480,7 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"../lang/isObject":53}],48:[function(require,module,exports){
+},{"../lang/isObject":55}],50:[function(require,module,exports){
 var baseToString = require('./baseToString'),
     isArray = require('../lang/isArray');
 
@@ -8210,7 +8510,7 @@ function toPath(value) {
 
 module.exports = toPath;
 
-},{"../lang/isArray":50,"./baseToString":29}],49:[function(require,module,exports){
+},{"../lang/isArray":52,"./baseToString":31}],51:[function(require,module,exports){
 var isArrayLike = require('../internal/isArrayLike'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -8246,7 +8546,7 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"../internal/isArrayLike":40,"../internal/isObjectLike":44}],50:[function(require,module,exports){
+},{"../internal/isArrayLike":42,"../internal/isObjectLike":46}],52:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
@@ -8288,7 +8588,7 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"../internal/getNative":39,"../internal/isLength":43,"../internal/isObjectLike":44}],51:[function(require,module,exports){
+},{"../internal/getNative":41,"../internal/isLength":45,"../internal/isObjectLike":46}],53:[function(require,module,exports){
 var isObject = require('./isObject');
 
 /** `Object#toString` result references. */
@@ -8328,7 +8628,7 @@ function isFunction(value) {
 
 module.exports = isFunction;
 
-},{"./isObject":53}],52:[function(require,module,exports){
+},{"./isObject":55}],54:[function(require,module,exports){
 var isFunction = require('./isFunction'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -8378,7 +8678,7 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"../internal/isObjectLike":44,"./isFunction":51}],53:[function(require,module,exports){
+},{"../internal/isObjectLike":46,"./isFunction":53}],55:[function(require,module,exports){
 /**
  * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -8408,7 +8708,7 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],54:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 var isLength = require('../internal/isLength'),
     isObjectLike = require('../internal/isObjectLike');
 
@@ -8484,7 +8784,7 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"../internal/isLength":43,"../internal/isObjectLike":44}],55:[function(require,module,exports){
+},{"../internal/isLength":45,"../internal/isObjectLike":46}],57:[function(require,module,exports){
 var getNative = require('../internal/getNative'),
     isArrayLike = require('../internal/isArrayLike'),
     isObject = require('../lang/isObject'),
@@ -8531,7 +8831,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"../internal/getNative":39,"../internal/isArrayLike":40,"../internal/shimKeys":46,"../lang/isObject":53}],56:[function(require,module,exports){
+},{"../internal/getNative":41,"../internal/isArrayLike":42,"../internal/shimKeys":48,"../lang/isObject":55}],58:[function(require,module,exports){
 var isArguments = require('../lang/isArguments'),
     isArray = require('../lang/isArray'),
     isIndex = require('../internal/isIndex'),
@@ -8597,7 +8897,7 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"../internal/isIndex":41,"../internal/isLength":43,"../lang/isArguments":49,"../lang/isArray":50,"../lang/isObject":53}],57:[function(require,module,exports){
+},{"../internal/isIndex":43,"../internal/isLength":45,"../lang/isArguments":51,"../lang/isArray":52,"../lang/isObject":55}],59:[function(require,module,exports){
 var keys = require('./keys'),
     toObject = require('../internal/toObject');
 
@@ -8632,7 +8932,7 @@ function pairs(object) {
 
 module.exports = pairs;
 
-},{"../internal/toObject":47,"./keys":55}],58:[function(require,module,exports){
+},{"../internal/toObject":49,"./keys":57}],60:[function(require,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -8654,7 +8954,7 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],59:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 var baseProperty = require('../internal/baseProperty'),
     basePropertyDeep = require('../internal/basePropertyDeep'),
     isKey = require('../internal/isKey');
@@ -8687,7 +8987,7 @@ function property(path) {
 
 module.exports = property;
 
-},{"../internal/baseProperty":26,"../internal/basePropertyDeep":27,"../internal/isKey":42}],60:[function(require,module,exports){
+},{"../internal/baseProperty":28,"../internal/basePropertyDeep":29,"../internal/isKey":44}],62:[function(require,module,exports){
 (function (global){
 /**
  * marked - a markdown parser
@@ -9977,7 +10277,7 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{}],61:[function(require,module,exports){
+},{}],63:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -10070,7 +10370,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[6])
+},{}]},{},[9])
 
 
 //# sourceMappingURL=koliseo-agenda.js.map

@@ -118,6 +118,11 @@ iframe{ max-width: 100%; }
     border-bottom: 2px solid #89621a;
     margin-bottom: -2px;
 }
+.ka-author-brief {
+    height: auto;
+    min-height: 0.7rem;
+    white-space: normal;
+}
 
 .social a i { margin:0; }
 

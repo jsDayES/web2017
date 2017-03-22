@@ -50,7 +50,7 @@
                         <!-- <li><a href="#proposals">${{ text.header.cfp }}$</a></li> -->
                         <!-- <li><a href="#streaming">${{ text.header.streaming }}$</a></li> -->
                         <li><a href="#speakers">${{ text.header.speakers }}$</a></li>
-                        <!-- <li><a href="#schedule">${{ text.header.schedule }}$</a></li> -->
+                        <li><a href="#schedule">${{ text.header.schedule }}$</a></li>
                         <li><a href="#where">${{ text.header.where }}$</a></li>
                         <li><a href="#tickets">${{ text.header.tickets }}$</a></li>
                         <li><a href="#organizers">${{ text.header.organizers }}$</a></li>
@@ -448,7 +448,7 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
             </div>
         </section>
 
-        <!-- <section id="schedule" class="schedule-section">
+        <section id="schedule" class="schedule-section">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-3 center-title text-center">
@@ -461,8 +461,6 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
                 <div class="row">
                     <div class="koliseo-schedule"></div>
                     <script>
-                      // Feel free to replace with your own way to load polyfill code.
-
                       /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
                       function loadJS( src, cb ){
                         'use strict';
@@ -480,19 +478,19 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
                       function onLoad() {
                         if (typeof Koliseo !== 'undefined' && Koliseo.agenda && typeof fetch !== 'undefined') {
                           Koliseo.agenda.render({
-                            c4pUrl: 'https://www.koliseo.com/jsdayes/jsday-es-2016/r4p/5683535625060352',
-                            agendaUrl: 'https://www.koliseo.com/jsdayes/jsday-es-2016/r4p/5683535625060352/agenda',
+                            c4pUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312',
+                            agendaUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312/agenda',
                             element: document.querySelector('.koliseo-schedule')
                           })
                         }
                       }
 
-                      (typeof fetch === 'undefined') && loadJS('js/koliseo-polyfill.js', onLoad)
-                      loadJS('js/koliseo-agenda.js', onLoad)
+                      (typeof fetch === 'undefined') && loadJS('/js/koliseo-polyfill.js', onLoad)
+                      loadJS('/js/koliseo-agenda.js', onLoad)
                       </script>
                 </div>
             </div>
-        </section> -->
+        </section>
         <section id="event-presentation">
             <div class="container">
                 <div class="row description">
