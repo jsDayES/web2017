@@ -108,7 +108,10 @@ iframe{ max-width: 100%; }
 .koliseo-schedule th { background:none }
 .koliseo-schedule .ka-tabs { margin:0 0 1em 0; padding:0; list-style:none;  border-bottom: 2px solid #ddd;  }
 .koliseo-schedule .ka-tabs li { display:inline-block; }
-#ka-user-info, .ka-hint { display:none }
+#ka-user-info .ka-button {
+    background-color: #f2b84b;
+    border-color:#f2b84b;
+}
 .koliseo-schedule tbody th { padding:.5em; background:#f2b84b; border-bottom:1px solid #ddd }
 .koliseo-schedule td { padding:.5em; border-bottom:1px solid #ddd; background:#fff }
 .ka-tab-a { display:block; padding:1em 2em}

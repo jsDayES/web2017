@@ -77,6 +77,9 @@
                                       <li class="large">${{ text.home.text2 }}$</li>
                                   </ul>
                               </div>
+                            <div class="text-center">
+                                <a class="btn btn-lg btn-yellow" target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017">${{ text.tickets.buyticket }}$</a>
+                            </div>                              
                             </div>
                         </div>
                     </div>
@@ -229,6 +232,20 @@
                               </ul>
                           </div>
                           <p class="speaker-bio">Simon has over twenty years of development experience and has worked on a variety of projects including object oriented databases, police communication systems, speech recognition and unified messaging. His current focus is contributing to the open source PhoneGap project to enable developers to create cross platform mobile applications using Web technologies. Simon’s been building web applications since the days they were written using shell scripts and he still has nightmares about those dark days.</p>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="img-speaker-box">
+                          <img src="/img/speakers/speaker24.jpg" width="200" class="img-circle" alt="Zeno Rocha">
+                          <span class="center-line"></span>
+                          <h3 class="speaker-name">Zeno Rocha</h3>
+                          <div class=" text-center">
+                              <ul class="list-inline social">
+                                  <li><a href="https://twitter.com/zenorocha"><span class="sr-only">Twitter Zeno Rocha</span> <i class="fa fa-twitter"></i></a></li>
+                                  <li><a href=" https://github.com/zenorocha"><span class="sr-only">Github Zeno Rocha</span> <i class="fa fa-github"></i></a></li>                                  
+                              </ul>
+                          </div>
+                          <p class="speaker-bio">Zeno Rocha is a Principal Developer Advocate at Liferay, Inc. He dedicates a lot of his time traveling to show how awesome HTML5 is, contributing to dozens of open source projects, and creating tools to help developers build great applications. Besides that, he's a member of the Google Developers Expert program.</p>
                         </div>
                       </li>
 
@@ -459,34 +476,35 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
                     </div>
                 </div>
                 <div class="row">
-                    <div class="koliseo-schedule"></div>
+                    <div class="koliseo-schedule"></div>                    
                     <script>
-                      /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
-                      function loadJS( src, cb ){
-                        'use strict';
-                        var ref = window.document.getElementsByTagName( 'script' )[ 0 ];
-                        var script = window.document.createElement( 'script' );
-                        script.src = src;
-                        script.async = true;
-                        ref.parentNode.insertBefore( script, ref );
-                        if (cb && typeof(cb) === 'function') {
-                          script.onload = cb;
-                        }
-                        return script;
-                      }
+  /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
+  function loadJS( src, cb ){
+    "use strict";
+    var ref = window.document.getElementsByTagName( "script" )[ 0 ];
+    var script = window.document.createElement( "script" );
+    script.src = src;
+    script.async = true;
+    ref.parentNode.insertBefore( script, ref );
+    if (cb && typeof(cb) === "function") {
+      script.onload = cb;
+    }
+    return script;
+  }
 
-                      function onLoad() {
-                        if (typeof Koliseo !== 'undefined' && Koliseo.agenda && typeof fetch !== 'undefined') {
-                          Koliseo.agenda.render({
-                            c4pUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312',
-                            agendaUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312/agenda',
-                            element: document.querySelector('.koliseo-schedule')
-                          })
-                        }
-                      }
+  function onLoad() {
+    if (typeof Koliseo !== 'undefined' && Koliseo.agenda && typeof fetch !== 'undefined') {
+      Koliseo.agenda.render({
+        c4pUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312',
+        agendaUrl: 'https://www.koliseo.com/jsdayes/jsdayes-2017/r4p/5765283616653312/agenda',
+        element: document.querySelector('.koliseo-schedule'),
+        oauthClientId: '5675156680736768'
+      });
+    }
+  }
 
-                      (typeof fetch === 'undefined') && loadJS('/js/koliseo-polyfill.js', onLoad)
-                      loadJS('/js/koliseo-agenda.js', onLoad)
+  (typeof fetch === 'undefined') && loadJS('/js/koliseo-polyfill.js', onLoad);
+  loadJS('/js/koliseo-agenda.js', onLoad);
                       </script>
                 </div>
             </div>
@@ -659,6 +677,22 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="pricing-simple special">
+                            <h3>${{ text.tickets.special }}$</h3>
+                            <h4>${{ text.tickets.specialTicketPrice }}$</h4>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check-square"></i>${{ text.tickets.specialpoint }}$</li>
+                            </ul>
+                            <div class="bottom">
+                                <div class="text-center">
+                                    <a class="btn btn-lg btn-yellow" target="_blank" href="https://www.koliseo.com/jsdayes/jsdayes-2017">${{ text.tickets.buy }}$</a>
+                                </div>
+                            </div>
+                            <p class="warning">${{ text.tickets.warning }}$</p>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="row tickets-row">
                     <div class="col-md-4 col-sm-6">
@@ -912,6 +946,11 @@ Desarrollo software desde mi más tierna infancia. De pequeño aprendí BASIC y 
                           <a href="https://js.foundation/"><img src="/img/sponsors/jsfoundation.png" width="220" class="img-responsive" alt="jsfoundation"></a>
                         </div>
                       </li>
+                      <li>
+                        <div class="box">
+                          <a href="https://www.autentia.com/"><img src="/img/sponsors/6175977216.jpeg" width="220" class="img-responsive" alt="autentia"></a>
+                        </div>
+                      </li>                      
                     </ul>
 
                 </div>

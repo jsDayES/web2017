@@ -96,12 +96,17 @@ tickets:
     point2: Comida (13 May)
     point3: Pack JSDayEs
     buy: Comprar
+    buyticket: Comprar entrada
     soldout: Agotadas
     specialWorkshop: Workshop con @substack
     specialWorkshopPrice: 80€
     specialWorkshopDesc: Hands On: The Modular Web! by <a target="_blank" href="https://twitter.com/substack">@substack</a>
     normal: Normales
     normalTicketPrice: 80€
+    special: Estudiantes y desempleados
+    specialTicketPrice: 20€
+    warning: Es necesario acreditar estar en paro o ser estudiante en la entrada de la conferencia.           
+    specialpoint: Lo mismo que un ticket normal
 
 footer:
     twitter: Twitter de JSDayES
