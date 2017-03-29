@@ -201,15 +201,35 @@ ul.speakers { display:flex; justify-content: flex-start; flex-wrap:wrap; list-st
     padding-bottom: 90px;
 }
 
-#tickets .tickets-row {
-    display: flex;
-    justify-content: center;
-}
-
-#tickets .tickets-row-1 {
+#tickets .col-md-4 > div {
     margin-bottom: 20px;
 }
 
 .list-inline.social {
     min-height: 38px;
+}
+
+@media (min-width: 980px) {
+    #tickets .tickets-row {
+        display: flex;
+        justify-content: center;
+    }
+    #tickets .col-md-4 > div {
+        margin-bottom: 0px;
+    }
+    #tickets .tickets-row-1 {
+        margin-bottom: 20px;
+    }
+}
+
+
+#schedule .kworkspace {
+    overflow: auto;
+    max-width: 100%;
+}
+
+@media (max-width: 980px) {
+    .ka-table-td, .ka-table-th {
+        min-width: auto;
+    }
 }
