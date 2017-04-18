@@ -141,6 +141,10 @@ iframe{ max-width: 100%; }
     padding-top: 80px;
 }
 
+.ka-talk-details-window {
+    z-index: 1040;
+}
+
 /**********************
 
 Speakers style
